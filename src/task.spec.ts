@@ -64,3 +64,22 @@ describe('parent', () => {
     expect(ws7.hours.total).toBe(0);
   });
 });
+
+describe('addBudget', () => {
+  it('should increase the budget appropriately', () => {
+    const project = new Task('HYN09');
+    const ws7 = new Task('WS7');
+    const ws8 = new Task('WS8');
+
+    ws7.parent = project;
+    ws8.parent = project;
+
+    ws7.addBudget('hours', 250, '2022-02-28');
+    expect(ws7.budget.hours.total).toBe(250);
+
+    ws8.addBudget('hours', 30, '2022-03-31');
+    expect(ws8.budget.hours.total).toBe(30);
+
+    expect(project.budget.hours.total).toBe(280);
+  });
+});
