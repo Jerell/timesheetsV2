@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { format, getDay, add } from 'date-fns';
+import { format, getDay, add, isBefore, isAfter } from 'date-fns';
 
 export type IDay = `20${'2' | '3'}${number}-${
   | '01'
@@ -73,5 +73,13 @@ export class DayNum implements IDayNum {
     const weekday = getDay(this.date);
     const dist = (7 + endDay - weekday) % 7;
     this.week = format(add(this.date, { days: dist }), 'yyyy-MM-dd');
+  }
+
+  isBefore(date: Date) {
+    return isBefore(this.date, date);
+  }
+
+  isAfter(date: Date) {
+    return isAfter(this.date, date);
   }
 }
