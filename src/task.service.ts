@@ -53,10 +53,6 @@ export class Task implements ITask {
   }
 
   recordTime(id: string, n: number, day: IDay) {
-    // initKey(this.rates, id);
-    // initKey(this.workLog, id, new Person(id));
-    // this.workLog[id].rate = this.rates[id];
-
     const h = new DayNum(n, day);
     const c = new DayNum(n * this.rates[id], day);
 
