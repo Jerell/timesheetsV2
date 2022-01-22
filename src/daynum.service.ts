@@ -1,8 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { format, getDay, add } from 'date-fns';
 
+export type IDay = `20${'2' | '3'}${number}-${
+  | '01'
+  | '02'
+  | '03'
+  | '04'
+  | '05'
+  | '06'
+  | '07'
+  | '08'
+  | '09'
+  | '10'
+  | '11'
+  | '12'}-${
+  | '01'
+  | '02'
+  | '03'
+  | '04'
+  | '05'
+  | '06'
+  | '07'
+  | '08'
+  | '09'
+  | '10'
+  | '11'
+  | '12'
+  | '13'
+  | '14'
+  | '15'
+  | '16'
+  | '17'
+  | '18'
+  | '19'
+  | '20'
+  | '21'
+  | '22'
+  | '23'
+  | '24'
+  | '25'
+  | '26'
+  | '27'
+  | '28'
+  | '29'
+  | '30'
+  | '31'}`;
+
 export interface IDayNum {
-  day: string;
+  day: IDay;
   week: string;
   num: number;
 }
@@ -10,18 +55,18 @@ export interface IDayNum {
 @Injectable()
 export class DayNum implements IDayNum {
   private date: Date;
-  public readonly day: string;
+  public readonly day: IDay;
   public readonly week: string;
   public readonly num: number;
 
-  constructor(num: number, day?: string) {
+  constructor(num: number, day?: IDay) {
     this.num = num;
     if (day) {
       this.day = day;
       this.date = new Date(day);
     } else {
       this.date = new Date();
-      this.day = format(this.date, 'yyyy-MM-dd');
+      this.day = format(this.date, 'yyyy-MM-dd') as IDay;
     }
 
     const endDay = 5; // friday
