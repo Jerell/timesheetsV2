@@ -25,6 +25,7 @@ interface ITask {
     quantity: number,
     date: IDay,
   ) => void;
+  parent?: ITask;
 }
 
 @Injectable()
@@ -40,6 +41,7 @@ export class Task implements ITask {
       cost: Summer;
     };
   };
+  public parent?: ITask;
 
   constructor(id: string) {
     this.id = id;
@@ -51,29 +53,44 @@ export class Task implements ITask {
   }
 
   recordTime(id: string, n: number, day: IDay) {
-    initKey(this.rates, id);
-    initKey(this.workLog, id, new Person(id));
-    this.workLog[id].rate = this.rates[id];
+    // initKey(this.rates, id);
+    // initKey(this.workLog, id, new Person(id));
+    // this.workLog[id].rate = this.rates[id];
 
     const h = new DayNum(n, day);
     const c = new DayNum(n * this.rates[id], day);
-    this.hours.add(h);
-    this.cost.add(c);
 
-    this.workLog[id].recordTime(n, day);
+    const record = (t: ITask) => {
+      if (!t) return;
+
+      initKey(t.rates, id);
+      initKey(t.workLog, id, new Person(id));
+      t.workLog[id].rate = t.rates[id];
+
+      t.hours.add(h);
+      t.cost.add(c);
+      t.workLog[id].recordTime(n, day);
+    };
+    record(this);
+    record(this.parent);
   }
 
   addExpense(thing: string, price: number, quantity: number, day: IDay) {
-    initKey(this.expenses, thing, {
-      quantity: new Summer(),
-      cost: new Summer(),
-    });
-
     const q = new DayNum(quantity, day);
     const c = new DayNum(quantity * price, day);
 
-    this.expenses[thing].quantity.add(q);
-    this.expenses[thing].cost.add(c);
-    this.cost.add(c);
+    const record = (t: ITask) => {
+      if (!t) return;
+      initKey(t.expenses, thing, {
+        quantity: new Summer(),
+        cost: new Summer(),
+      });
+      t.expenses[thing].quantity.add(q);
+      t.expenses[thing].cost.add(c);
+      t.cost.add(c);
+    };
+
+    record(this);
+    record(this.parent);
   }
 }

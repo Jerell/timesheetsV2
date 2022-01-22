@@ -36,3 +36,31 @@ describe('expenses', () => {
     );
   });
 });
+
+describe('parent', () => {
+  it('should group the hours and costs of child tasks', () => {
+    const project = new Task('HYN09');
+    const ws7 = new Task('WS7');
+    const ws8 = new Task('WS8');
+
+    ws7.parent = project;
+    ws8.parent = project;
+
+    ws7.addExpense('OLGA', 19060, 0.5, '2022-01-22');
+    expect(ws7.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
+    expect(ws8.cost.total).toBe(0);
+    expect(project.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
+
+    ws8.rates['jim'] = 5;
+    ws8.rates['jom'] = 2;
+
+    ws8.recordTime('jim', 6, '2022-01-22');
+    ws8.recordTime('jom', 1, '2022-01-22');
+
+    expect(ws8.cost.total).toBe(32);
+    expect(project.cost.total).toBe(32 + 0.5 * 19060);
+    expect(project.hours.total).toBe(7);
+    expect(ws8.hours.total).toBe(7);
+    expect(ws7.hours.total).toBe(0);
+  });
+});
