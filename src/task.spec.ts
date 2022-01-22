@@ -17,3 +17,22 @@ describe('totals - two workers', () => {
     expect(job.workLog['jom'].cost.total).toBe(2);
   });
 });
+
+describe('expenses', () => {
+  it('should set the cost totals appropriately', () => {
+    const job = new Task('taskname');
+
+    job.addExpense('OLGA', 19060, 0.5, '2022-01-22');
+    expect(job.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
+    expect(job.cost.total).toBe(0.5 * 19060);
+
+    job.addExpense('OLGA', 19060, 1, '2022-01-23');
+    expect(job.cost.total).toBe(1.5 * 19060);
+    expect(job.expenses['OLGA'].cost.total).toBe(1.5 * 19060);
+
+    expect(job.cost.before('2022-01-23').total).toBe(0.5 * 19060);
+    expect(job.expenses['OLGA'].cost.before('2022-01-23').total).toBe(
+      0.5 * 19060,
+    );
+  });
+});

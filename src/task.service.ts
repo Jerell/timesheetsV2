@@ -11,7 +11,20 @@ interface ITask {
   workLog: {
     [person: string]: IPerson;
   };
+  rates: { [person: string]: number };
+  expenses: {
+    [thing: string]: {
+      quantity: Summer;
+      cost: Summer;
+    };
+  };
   recordTime: (id: string, n: number, day: IDay) => void;
+  addExpense: (
+    thing: string,
+    price: number,
+    quantity: number,
+    date: IDay,
+  ) => void;
 }
 
 @Injectable()
@@ -21,6 +34,12 @@ export class Task implements ITask {
   public cost: Summer;
   public workLog: { [person: string]: IPerson };
   public rates: { [person: string]: number };
+  public expenses: {
+    [thing: string]: {
+      quantity: Summer;
+      cost: Summer;
+    };
+  };
 
   constructor(id: string) {
     this.id = id;
@@ -28,6 +47,7 @@ export class Task implements ITask {
     this.cost = new Summer();
     this.workLog = {};
     this.rates = {};
+    this.expenses = {};
   }
 
   recordTime(id: string, n: number, day: IDay) {
@@ -41,5 +61,19 @@ export class Task implements ITask {
     this.cost.add(c);
 
     this.workLog[id].recordTime(n, day);
+  }
+
+  addExpense(thing: string, price: number, quantity: number, day: IDay) {
+    initKey(this.expenses, thing, {
+      quantity: new Summer(),
+      cost: new Summer(),
+    });
+
+    const q = new DayNum(quantity, day);
+    const c = new DayNum(quantity * price, day);
+
+    this.expenses[thing].quantity.add(q);
+    this.expenses[thing].cost.add(c);
+    this.cost.add(c);
   }
 }
