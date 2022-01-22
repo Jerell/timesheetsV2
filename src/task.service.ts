@@ -18,6 +18,11 @@ interface ITask {
       cost: Summer;
     };
   };
+  parent?: ITask;
+  budget: {
+    hours: Summer;
+    cost: Summer;
+  };
   recordTime: (id: string, n: number, day: IDay) => void;
   addExpense: (
     thing: string,
@@ -25,7 +30,7 @@ interface ITask {
     quantity: number,
     date: IDay,
   ) => void;
-  parent?: ITask;
+  addBudget: (type: 'hours' | 'cost', n: number, day: IDay) => void;
 }
 
 @Injectable()
@@ -42,6 +47,10 @@ export class Task implements ITask {
     };
   };
   public parent?: ITask;
+  public budget: {
+    hours: Summer;
+    cost: Summer;
+  };
 
   constructor(id: string) {
     this.id = id;
@@ -50,6 +59,10 @@ export class Task implements ITask {
     this.workLog = {};
     this.rates = {};
     this.expenses = {};
+    this.budget = {
+      hours: new Summer(),
+      cost: new Summer(),
+    };
   }
 
   recordTime(id: string, n: number, day: IDay) {
@@ -88,5 +101,11 @@ export class Task implements ITask {
 
     record(this);
     record(this.parent);
+  }
+
+  addBudget(type: 'hours' | 'cost', n: number, day: IDay) {
+    const b = new DayNum(n, day);
+    this.budget[type].add(b);
+    this.parent?.budget[type].add(b);
   }
 }
