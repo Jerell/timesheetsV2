@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { format, getDay, add } from 'date-fns';
 
-interface IDayNum {
+export interface IDayNum {
   day: string;
+  week: string;
   num: number;
 }
 
 @Injectable()
-export class DayNum {
+export class DayNum implements IDayNum {
   private date: Date;
   public readonly day: string;
-  public readonly end: string;
+  public readonly week: string;
   public readonly num: number;
 
   constructor(num: number, day?: string) {
@@ -26,6 +27,6 @@ export class DayNum {
     const endDay = 5; // friday
     const weekday = getDay(this.date);
     const dist = (7 + endDay - weekday) % 7;
-    this.end = format(add(this.date, { days: dist }), 'yyyy-MM-dd');
+    this.week = format(add(this.date, { days: dist }), 'yyyy-MM-dd');
   }
 }
