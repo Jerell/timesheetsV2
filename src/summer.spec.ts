@@ -78,3 +78,17 @@ describe('after()', () => {
     expect(after22.total).toBe(dn2.num);
   });
 });
+
+describe('cumulative', () => {
+  it('should return a cumulative series of values', () => {
+    const dn1 = new DayNum(3, '2022-01-22');
+    const dn2 = new DayNum(4, '2022-01-23');
+    const hours = new Summer();
+
+    hours.add(dn1);
+    hours.add(dn2);
+
+    expect(hours.cumulative.totals.daily['2022-01-22']).toBe(3);
+    expect(hours.cumulative.totals.daily['2022-01-23']).toBe(7);
+  });
+});

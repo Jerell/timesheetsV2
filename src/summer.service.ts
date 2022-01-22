@@ -9,8 +9,6 @@ interface IDayTotal {
 @Injectable()
 export class Summer {
   public total: number;
-  public dayTotals: IDayTotal;
-  public weekTotals: IDayTotal;
   public totals: {
     daily: IDayTotal;
     weekly: IDayTotal;
@@ -64,5 +62,16 @@ export class Summer {
       }
       return acc;
     }, new Summer());
+  }
+
+  get cumulative() {
+    let runningTotal = 0;
+    return Object.keys(this.totals.daily)
+      .sort()
+      .reduce((acc: Summer, day: IDay) => {
+        runningTotal += this.totals.daily[day];
+        acc.add(new DayNum(runningTotal, day));
+        return acc;
+      }, new Summer());
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DayNum, IDay } from './daynum.service';
 import { Summer } from './summer.service';
 
-interface IPerson {
+export interface IPerson {
   id: string;
   rate: number;
   hours: Summer;
