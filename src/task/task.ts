@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IDay, DayNum } from '../utils/daynum.service';
-import { IPerson, Person } from '../person/person.service';
-import { Summer } from '../utils/summer.service';
+import { IDay, DayNum } from '../utils/daynum';
+import { IPerson, Person } from '../person/person';
+import { Summer } from '../utils/summer';
 import initKey from '../utils/initKey';
 
 interface ITask {
@@ -33,7 +33,6 @@ interface ITask {
   addBudget: (type: 'hours' | 'cost', n: number, day: IDay) => void;
 }
 
-@Injectable()
 export class Task implements ITask {
   public id: string;
   public hours: Summer;

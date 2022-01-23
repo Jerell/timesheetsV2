@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DayNum, IDay, IDayNum } from './daynum.service';
+import { DayNum, IDay, IDayNum } from './daynum';
 import initKey from './initKey';
 
 interface IDayTotal {

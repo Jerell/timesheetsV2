@@ -1,5 +1,5 @@
-import { Summer } from './summer.service';
-import { DayNum } from './daynum.service';
+import { Summer } from './summer';
+import { DayNum } from './daynum';
 
 describe('add()', () => {
   it('increases the total', () => {
