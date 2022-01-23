@@ -1,5 +1,5 @@
-import { DayNum, IDay } from '../utils/daynum';
-import { Summer } from '../utils/summer';
+import { DayNum, IDay } from '../common/daynum';
+import { Summer } from '../common/summer';
 
 export interface IPerson {
   id: string;
