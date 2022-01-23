@@ -1,7 +1,7 @@
-import { IDay, DayNum } from '../utils/daynum';
+import { IDay, DayNum } from '../common/daynum';
 import { IPerson, Person } from '../person/person';
-import { Summer } from '../utils/summer';
-import initKey from '../utils/initKey';
+import { Summer } from '../common/summer';
+import initKey from '../common/initKey';
 
 interface ITask {
   id: string;
@@ -30,6 +30,7 @@ interface ITask {
     date: IDay,
   ) => void;
   addBudget: (type: 'hours' | 'cost', n: number, day: IDay) => void;
+  markDay: (day: IDay) => void;
 }
 
 export class Task implements ITask {
@@ -105,5 +106,10 @@ export class Task implements ITask {
     const b = new DayNum(n, day);
     this.budget[type].add(b);
     this.parent?.budget[type].add(b);
+  }
+
+  markDay(day: IDay) {
+    this.addBudget('hours', 0, day);
+    this.addBudget('cost', 0, day);
   }
 }

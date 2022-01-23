@@ -21,7 +21,7 @@ export class Summer {
   }
 
   add(daynum: IDayNum) {
-    if (!daynum.num) return;
+    // if (!daynum.num) return;
 
     this.total += daynum.num;
 
