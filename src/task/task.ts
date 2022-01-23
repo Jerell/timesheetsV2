@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import { IDay, DayNum } from '../utils/daynum';
 import { IPerson, Person } from '../person/person';
 import { Summer } from '../utils/summer';

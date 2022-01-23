@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import { DayNum, IDay, IDayNum } from './daynum';
 import initKey from './initKey';
 
@@ -6,7 +5,6 @@ interface IDayTotal {
   [day: string]: number;
 }
 
-@Injectable()
 export class Summer {
   public total: number;
   public totals: {
