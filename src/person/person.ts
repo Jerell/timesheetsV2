@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { DayNum, IDay } from './daynum.service';
-import { Summer } from './summer.service';
+import { DayNum, IDay } from '../common/daynum';
+import { Summer } from '../common/summer';
 
 export interface IPerson {
   id: string;
@@ -10,7 +9,6 @@ export interface IPerson {
   recordTime: (n: number, day: IDay) => void;
 }
 
-@Injectable()
 export class Person implements IPerson {
   public id: string;
   public rate: number;

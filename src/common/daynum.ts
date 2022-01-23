@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import { format, getDay, add, isBefore, isAfter } from 'date-fns';
 
 export type IDay = `20${'2' | '3'}${number}-${
@@ -52,7 +51,6 @@ export interface IDayNum {
   num: number;
 }
 
-@Injectable()
 export class DayNum implements IDayNum {
   private date: Date;
   public readonly day: IDay;

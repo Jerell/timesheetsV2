@@ -1,4 +1,4 @@
-import { Person } from './person.service';
+import { Person } from './person';
 
 describe('recordTime', () => {
   it('calculates cost total', () => {

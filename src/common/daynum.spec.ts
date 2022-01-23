@@ -1,4 +1,4 @@
-import { DayNum } from './daynum.service';
+import { DayNum } from './daynum';
 
 describe('end', () => {
   it('returns the correct end date (saturday)', () => {

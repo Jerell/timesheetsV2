@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { IDay, DayNum } from './daynum.service';
-import { IPerson, Person } from './person.service';
-import { Summer } from './summer.service';
-import initKey from './utils/initKey';
+import { IDay, DayNum } from '../common/daynum';
+import { IPerson, Person } from '../person/person';
+import { Summer } from '../common/summer';
+import initKey from '../common/initKey';
 
 interface ITask {
   id: string;
@@ -31,9 +30,9 @@ interface ITask {
     date: IDay,
   ) => void;
   addBudget: (type: 'hours' | 'cost', n: number, day: IDay) => void;
+  markDay: (day: IDay) => void;
 }
 
-@Injectable()
 export class Task implements ITask {
   public id: string;
   public hours: Summer;
@@ -107,5 +106,10 @@ export class Task implements ITask {
     const b = new DayNum(n, day);
     this.budget[type].add(b);
     this.parent?.budget[type].add(b);
+  }
+
+  markDay(day: IDay) {
+    this.addBudget('hours', 0, day);
+    this.addBudget('cost', 0, day);
   }
 }

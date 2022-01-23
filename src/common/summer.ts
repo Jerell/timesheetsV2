@@ -1,12 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { DayNum, IDay, IDayNum } from './daynum.service';
-import initKey from './utils/initKey';
+import { DayNum, IDay, IDayNum } from './daynum';
+import initKey from './initKey';
 
 interface IDayTotal {
   [day: string]: number;
 }
 
-@Injectable()
 export class Summer {
   public total: number;
   public totals: {
@@ -23,7 +21,7 @@ export class Summer {
   }
 
   add(daynum: IDayNum) {
-    if (!daynum.num) return;
+    // if (!daynum.num) return;
 
     this.total += daynum.num;
 
