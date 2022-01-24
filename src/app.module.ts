@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TasksModule } from './task/tasks.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [TasksModule],
+  imports: [TasksModule, AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
