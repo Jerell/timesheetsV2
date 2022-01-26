@@ -1,5 +1,13 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Request,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AppService } from './app.service';
+import { HeaderApiKeyGuard } from './auth/header-api-key/header-api-key.guard';
 
 @Controller()
 export class AppController {
@@ -8,5 +16,11 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('protected')
+  @UseGuards(HeaderApiKeyGuard)
+  getProtected() {
+    return 1;
   }
 }

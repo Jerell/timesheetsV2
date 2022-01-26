@@ -6,6 +6,7 @@ import {
   Body,
   Query,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 
