@@ -3,16 +3,26 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { TasksModule } from './task/tasks.module';
-import { UsersModule } from './users/users.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { AzureTableStorageModule } from '@nestjs/azure-database';
 
 @Module({
   imports: [
+    AzureTableStorageModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        connectionString: configService.get<string>(
+          'AZURE_STORAGE_CONNECTION_STRING',
+        ),
+      }),
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     TasksModule,
-    UsersModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

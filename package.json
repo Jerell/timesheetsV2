@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@nestjs/azure-database": "^2.1.0",
     "@nestjs/common": "^8.1.1",
     "@nestjs/config": "^1.1.6",
     "@nestjs/core": "^8.1.1",
@@ -30,6 +31,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.2",
     "date-fns": "^2.28.0",
+    "dotenv": "^14.3.2",
     "passport": "^0.5.2",
     "passport-headerapikey": "^1.2.2",
     "reflect-metadata": "^0.1.13",
