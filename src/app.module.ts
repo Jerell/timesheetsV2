@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AzureTableStorageModule } from '@nestjs/azure-database';
+import { EventsModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AzureTableStorageModule } from '@nestjs/azure-database';
     AuthModule,
     TasksModule,
     UserModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
