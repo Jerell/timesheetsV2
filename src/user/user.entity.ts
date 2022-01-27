@@ -3,13 +3,14 @@ import {
   EntityRowKey,
   EntityString,
   EntityBoolean,
+  EntityInt32,
 } from '@nestjs/azure-database';
 
 @EntityPartitionKey('User')
-@EntityRowKey('id')
+@EntityRowKey('what')
 export class User {
-  @EntityString() id: string;
+  @EntityInt32() id: number;
   @EntityString() name: string;
-  @EntityString() email: string;
-  @EntityBoolean() admin: boolean;
+  @EntityBoolean() admin: boolean = false;
+  @EntityBoolean() active: boolean = true;
 }

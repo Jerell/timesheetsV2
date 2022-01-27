@@ -1,6 +1,6 @@
 export class UserDTO {
-  id: string;
+  id: number = 0;
   name: string;
-  email: string;
   admin: boolean;
+  active: boolean;
 }
