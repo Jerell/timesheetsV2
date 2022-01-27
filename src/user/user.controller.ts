@@ -73,11 +73,17 @@ export class UserController {
     @Body() userData: Partial<UserDTO>,
   ) {
     try {
-      const user = new User();
-      // Disclaimer: Assign only the properties you are expecting!
+      const oldProps = await this.getUser(rowKey);
+      const user = (({ id, name, active, admin }) => ({
+        id,
+        name,
+        active,
+        admin,
+      }))(oldProps);
+      // Assign only the properties you are expecting!
       Object.assign(user, userData);
 
-      return await this.userService.update(rowKey, user);
+      return await this.saveUser(user);
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }
