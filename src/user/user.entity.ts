@@ -9,7 +9,7 @@ import {
 @EntityPartitionKey('User')
 @EntityRowKey('')
 export class User {
-  @EntityInt32() id: number;
+  @EntityString() id: string;
   @EntityString() name: string;
   @EntityBoolean() admin: boolean = false;
   @EntityBoolean() active: boolean = true;

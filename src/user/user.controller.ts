@@ -42,8 +42,10 @@ export class UserController {
     try {
       const user = new User();
 
-      const n = (await this.getAllUsers()).entries.length;
-      userData.id = n;
+      if (!userData.id) {
+        const n = (await this.getAllUsers()).entries.length;
+        userData.id = n.toString();
+      }
 
       Object.assign(user, userData);
 
@@ -53,15 +55,15 @@ export class UserController {
     }
   }
 
-  @Put(':rowKey')
-  async saveUser(@Param('rowKey') rowKey, @Body() userData: UserDTO) {
+  @Put()
+  async saveUser(@Body() userData: UserDTO) {
     try {
       const user = new User();
       Object.assign(user, userData);
 
-      return await this.userService.update(rowKey, user);
+      return await this.userService.update(userData.id, user);
     } catch (error) {
-      throw new UnprocessableEntityException(error);
+      return await this.createUser(userData);
     }
   }
 

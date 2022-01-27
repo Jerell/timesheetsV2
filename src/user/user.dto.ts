@@ -1,5 +1,5 @@
 export class UserDTO {
-  id: number = 0;
+  id: string;
   name: string;
   admin: boolean;
   active: boolean;
