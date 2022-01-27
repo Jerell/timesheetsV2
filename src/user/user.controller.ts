@@ -14,11 +14,9 @@ import {
 import { UserDTO } from './user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
-const Fuse = require('fuse.js');
 
 @Controller('users')
 export class UserController {
-  private readonly logger = new Logger(UserController.name);
   constructor(private readonly userService: UserService) {}
 
   @Get()
@@ -54,8 +52,7 @@ export class UserController {
       const user = new User();
 
       if (!userData.id) {
-        const n = (await this.getAllUsers()).entries.length;
-        userData.id = n.toString();
+        userData.id = (await this.userService.count()).toString();
       }
 
       Object.assign(user, userData);

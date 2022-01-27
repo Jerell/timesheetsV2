@@ -24,6 +24,10 @@ export class UserService {
     return this.userRepository.findAll();
   }
 
+  async count(): Promise<number> {
+    return (await this.findAll()).entries.length;
+  }
+
   async searchByName(name: string): Promise<AzureTableStorageResultList<User>> {
     const people = new Fuse((await this.userRepository.findAll()).entries, {
       keys: ['name'],
