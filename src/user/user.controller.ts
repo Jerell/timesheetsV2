@@ -28,17 +28,12 @@ export class UserController {
 
   @Get('list')
   async listAllUsers() {
-    return await (
-      await this.getAllUsers()
-    ).entries.map(({ name, id }) => ({ name, id }));
+    return await this.userService.listAllUsers();
   }
 
   @Get('search/:name')
   async searchByName(@Param('name') name) {
-    const people = (await this.getAllUsers()).entries;
-    const fuse = new Fuse(people, { keys: ['name'] });
-
-    return fuse.search(name);
+    return await this.userService.searchByName(name);
   }
 
   @Get(':rowKey')
