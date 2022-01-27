@@ -1,3 +1,4 @@
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {
@@ -6,6 +7,10 @@ import {
   SwaggerDocumentOptions,
 } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+
+// the former gets overwritten for some reason
+process.env.AZURE_STORAGE_CONNECTION_STRING =
+  process.env.AZ_STORAGE_CONNECTION_STRING;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
