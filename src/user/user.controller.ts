@@ -47,7 +47,7 @@ export class UserController {
 
       Object.assign(user, userData);
 
-      return await this.userService.create(user);
+      return await this.userService.create(user, String(user.id));
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }

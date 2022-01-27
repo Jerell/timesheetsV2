@@ -7,7 +7,7 @@ import {
 } from '@nestjs/azure-database';
 
 @EntityPartitionKey('User')
-@EntityRowKey('what')
+@EntityRowKey('')
 export class User {
   @EntityInt32() id: number;
   @EntityString() name: string;

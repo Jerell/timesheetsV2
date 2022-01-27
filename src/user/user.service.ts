@@ -22,8 +22,8 @@ export class UserService {
     return this.userRepository.findAll();
   }
 
-  async create(user: User): Promise<User> {
-    return this.userRepository.create(user);
+  async create(user: User, rowKey: string): Promise<User> {
+    return this.userRepository.create(user, rowKey);
   }
 
   async update(rowKey: string, user: Partial<User>): Promise<User> {
