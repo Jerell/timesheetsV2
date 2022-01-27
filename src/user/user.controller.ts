@@ -25,6 +25,13 @@ export class UserController {
     return await this.userService.findAll();
   }
 
+  @Get('list')
+  async listAllUsers() {
+    return await (
+      await this.getAllUsers()
+    ).entries.map(({ name, id }) => ({ name, id }));
+  }
+
   @Get(':rowKey')
   async getUser(@Param('rowKey') rowKey) {
     try {
