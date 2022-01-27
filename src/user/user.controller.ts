@@ -14,6 +14,7 @@ import {
 import { UserDTO } from './user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+const Fuse = require('fuse.js');
 
 @Controller('users')
 export class UserController {
@@ -30,6 +31,14 @@ export class UserController {
     return await (
       await this.getAllUsers()
     ).entries.map(({ name, id }) => ({ name, id }));
+  }
+
+  @Get('search/:name')
+  async searchByName(@Param('name') name) {
+    const people = (await this.getAllUsers()).entries;
+    const fuse = new Fuse(people, { keys: ['name'] });
+
+    return fuse.search(name);
   }
 
   @Get(':rowKey')
