@@ -1,6 +1,7 @@
 import { AzureTableStorageModule } from '@nestjs/azure-database';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { IsExistingTaskConstraint } from 'src/common/validation/is-existing-task';
 import { IsAssignedToTaskConstraint } from 'src/common/validation/isAssignedToTask';
 import {
   IsRegistered,
@@ -42,7 +43,11 @@ const storage = [
   }),
 ];
 
-const constraints = [IsRegisteredConstraint, IsAssignedToTaskConstraint];
+const constraints = [
+  IsRegisteredConstraint,
+  IsAssignedToTaskConstraint,
+  IsExistingTaskConstraint,
+];
 
 @Module({
   imports: [CqrsModule, ...storage],
