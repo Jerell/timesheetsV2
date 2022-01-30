@@ -22,12 +22,17 @@ export class EventService {
     return this.eventRepository.findAll();
   }
 
-  async count(): Promise<number> {
+  async count(taskID?: string): Promise<number> {
     return (await this.findAll()).entries.length;
   }
 
   async create(event: Event, rowKey: string): Promise<Event> {
     return this.eventRepository.create(event, rowKey);
+  }
+
+  async createNext(event: Event): Promise<Event> {
+    const n = await this.count();
+    return await this.create(event, n.toString());
   }
 
   async update(rowKey: string, event: Partial<Event>): Promise<Event> {

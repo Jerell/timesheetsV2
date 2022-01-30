@@ -43,12 +43,7 @@ export class EventController {
     try {
       const event = new Event(eventData);
 
-      console.log(1, event);
-      console.log(event.payload, typeof event.payload);
-
-      const n = (await this.eventService.count()).toString();
-
-      return await this.eventService.create(event, n);
+      return await this.eventService.createNext(event);
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }

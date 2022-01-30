@@ -1,4 +1,4 @@
-import { Task } from './task';
+import { Task } from './task.model';
 
 describe('totals - two workers', () => {
   it('should calculate the totals multiple workers', () => {

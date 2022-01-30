@@ -4,7 +4,6 @@ import {
   EntityString,
   EntityInt32,
 } from '@nestjs/azure-database';
-import { Transform } from 'class-transformer';
 import { EventDTO } from './event.dto';
 
 @EntityPartitionKey('Event')

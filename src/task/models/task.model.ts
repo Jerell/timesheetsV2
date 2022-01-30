@@ -1,39 +1,11 @@
-import { IDay, DayNum } from '../common/daynum';
-import { IPerson, Person } from '../person/person';
-import { Summer } from '../common/summer';
-import initKey from '../common/initKey';
+import { IDay, DayNum } from '../../common/daynum';
+import { IPerson, Person } from '../../person/person';
+import { Summer } from '../../common/summer';
+import initKey from '../../common/initKey';
+import { AggregateRoot } from '@nestjs/cqrs';
+import { RecordedTimeEvent } from '../events/recorded-time.event';
 
-interface ITask {
-  id: string;
-  hours: Summer;
-  cost: Summer;
-  workLog: {
-    [person: string]: IPerson;
-  };
-  rates: { [person: string]: number };
-  expenses: {
-    [thing: string]: {
-      quantity: Summer;
-      cost: Summer;
-    };
-  };
-  parent?: ITask;
-  budget: {
-    hours: Summer;
-    cost: Summer;
-  };
-  recordTime: (id: string, n: number, day: IDay) => void;
-  addExpense: (
-    thing: string,
-    price: number,
-    quantity: number,
-    date: IDay,
-  ) => void;
-  addBudget: (type: 'hours' | 'cost', n: number, day: IDay) => void;
-  markDay: (day: IDay) => void;
-}
-
-export class Task implements ITask {
+export class Task extends AggregateRoot {
   public id: string;
   public hours: Summer;
   public cost: Summer;
@@ -45,13 +17,15 @@ export class Task implements ITask {
       cost: Summer;
     };
   };
-  public parent?: ITask;
+  public parent?: Task;
   public budget: {
     hours: Summer;
     cost: Summer;
   };
 
   constructor(id: string) {
+    super();
+
     this.id = id;
     this.hours = new Summer();
     this.cost = new Summer();
@@ -64,20 +38,23 @@ export class Task implements ITask {
     };
   }
 
-  recordTime(id: string, n: number, day: IDay) {
+  recordTime(userID: string, n: number, day: IDay) {
+    console.log('!');
     const h = new DayNum(n, day);
-    const c = new DayNum(n * this.rates[id], day);
+    const c = new DayNum(n * this.rates[userID], day);
 
-    const record = (t: ITask) => {
+    const record = (t: Task) => {
       if (!t) return;
 
-      initKey(t.rates, id);
-      initKey(t.workLog, id, new Person(id));
-      t.workLog[id].rate = t.rates[id];
+      initKey(t.rates, userID);
+      initKey(t.workLog, userID, new Person(userID));
+      t.workLog[userID].rate = t.rates[userID];
 
       t.hours.add(h);
       t.cost.add(c);
-      t.workLog[id].recordTime(n, day);
+      t.workLog[userID].recordTime(n, day);
+
+      t.apply(new RecordedTimeEvent(t.id, userID, n, day));
     };
     record(this);
     record(this.parent);
@@ -87,7 +64,7 @@ export class Task implements ITask {
     const q = new DayNum(quantity, day);
     const c = new DayNum(quantity * price, day);
 
-    const record = (t: ITask) => {
+    const record = (t: Task) => {
       if (!t) return;
       initKey(t.expenses, thing, {
         quantity: new Summer(),

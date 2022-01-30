@@ -6,7 +6,6 @@ import {
   AzureTableStorageResponse,
 } from '@nestjs/azure-database';
 import { User } from './user.entity';
-import { UserDTO } from './user.dto';
 const Fuse = require('fuse.js');
 
 @Injectable()
