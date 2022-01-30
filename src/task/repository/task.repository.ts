@@ -28,4 +28,9 @@ export class TaskRepository {
 
     return task;
   }
+
+  add(task: Task) {
+    this.tasks.push(task);
+    return task;
+  }
 }

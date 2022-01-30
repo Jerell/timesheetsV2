@@ -23,13 +23,14 @@ export class TaskController {
   }
 
   @Post('new')
-  async addTask(@Body() newTaskDTO: newTaskDTO) {
+  async addTask(@Body() newTaskDto: newTaskDTO) {
+    console.log(newTaskDto);
     await this.tasksService.create(
-      newTaskDTO.taskID,
-      newTaskDTO.start,
-      newTaskDTO.end,
+      newTaskDto.taskID,
+      newTaskDto.start,
+      newTaskDto.end,
     );
-    return await this.tasksService.getTask(newTaskDTO.taskID);
+    return await this.tasksService.getTask(newTaskDto.taskID);
   }
 
   @Post('submit')

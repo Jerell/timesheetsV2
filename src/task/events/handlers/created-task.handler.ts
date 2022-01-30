@@ -2,22 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { Event } from 'src/event/event.entity';
 import { EventService } from 'src/event/event.service';
-import { RecordedTimeEvent } from '../recorded-time.event';
+import { CreatedTaskEvent } from '../created-task.event';
 
 @Injectable()
-@EventsHandler(RecordedTimeEvent)
-export class RecordedTimeHandler implements IEventHandler<RecordedTimeEvent> {
+@EventsHandler(CreatedTaskEvent)
+export class CreatedTaskHandler implements IEventHandler<CreatedTaskEvent> {
   constructor(private eventService: EventService) {}
 
-  async handle(event: RecordedTimeEvent) {
+  async handle(event: CreatedTaskEvent) {
+    console.log('yuh.');
     this.eventService.createNext(
       new Event({
         taskID: event.taskID,
         payload: {
-          event: 'recordTime',
-          userID: event.userID,
-          n: event.n,
-          day: event.day,
+          event: 'createTask',
+          start: event.start,
+          end: event.end,
         },
       }),
     );

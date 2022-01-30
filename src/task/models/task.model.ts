@@ -38,8 +38,11 @@ export class Task extends AggregateRoot {
     };
   }
 
+  setID(id: string) {
+    this.id = id;
+  }
+
   recordTime(userID: string, n: number, day: IDay) {
-    console.log('!');
     const h = new DayNum(n, day);
     const c = new DayNum(n * this.rates[userID], day);
 

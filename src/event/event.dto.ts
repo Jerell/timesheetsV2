@@ -1,4 +1,4 @@
 export class EventDTO {
-  task: string;
+  taskID: string;
   payload: object = {};
 }

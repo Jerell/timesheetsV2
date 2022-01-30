@@ -4,6 +4,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { EventService } from 'src/event/event.service';
 import { CreateTaskHandler } from './commands/handlers/create-task.handler';
 import { RecordTimeHandler } from './commands/handlers/record-time.handler';
+import { CreatedTaskHandler } from './events/handlers/created-task.handler';
 import { RecordedTimeHandler } from './events/handlers/recorded-time.handler';
 import { RecordedTimeEvent } from './events/recorded-time.event';
 import { TaskRepository } from './repository/task.repository';
@@ -11,12 +12,8 @@ import { TaskController } from './task.controller';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 
-const CommandHandlers = [
-  RecordTimeHandler,
-  RecordedTimeHandler,
-  CreateTaskHandler,
-];
-const EventHandlers = [RecordedTimeEvent];
+const CommandHandlers = [RecordTimeHandler, CreateTaskHandler];
+const EventHandlers = [RecordedTimeHandler, CreatedTaskHandler];
 
 @Module({
   imports: [
