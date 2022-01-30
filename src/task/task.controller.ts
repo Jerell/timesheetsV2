@@ -24,7 +24,6 @@ export class TaskController {
 
   @Post('new')
   async addTask(@Body() newTaskDto: newTaskDTO) {
-    console.log(newTaskDto);
     await this.tasksService.create(
       newTaskDto.taskID,
       newTaskDto.start,

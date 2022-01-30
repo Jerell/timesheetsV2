@@ -39,7 +39,5 @@ export class TasksService {
 
   async create(taskID: string, start: IDay, end: IDay) {
     return this.commandBus.execute(new CreateTaskCommand(taskID, start, end));
-
-    // return await this.repository.create(newTaskDto);
   }
 }

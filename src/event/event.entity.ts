@@ -10,6 +10,8 @@ import { EventDTO } from './event.dto';
 export class Event {
   @EntityString() taskID: string;
 
+  @EntityString() type: string;
+
   @EntityString()
   payload: string;
 

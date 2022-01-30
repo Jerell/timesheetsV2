@@ -21,7 +21,6 @@ export class CreateTaskHandler implements ICommandHandler<CreateTaskCommand> {
 
   async execute(command: CreateTaskCommand) {
     const { taskID, start, end } = command;
-    console.log('yuh?');
 
     const TaskModel = this.publisher.mergeClassContext(Task);
 

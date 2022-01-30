@@ -13,8 +13,8 @@ export class RecordedTimeHandler implements IEventHandler<RecordedTimeEvent> {
     this.eventService.createNext(
       new Event({
         taskID: event.taskID,
+        type: 'recordTime',
         payload: {
-          event: 'recordTime',
           userID: event.userID,
           n: event.n,
           day: event.day,

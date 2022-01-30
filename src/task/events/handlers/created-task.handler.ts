@@ -10,12 +10,11 @@ export class CreatedTaskHandler implements IEventHandler<CreatedTaskEvent> {
   constructor(private eventService: EventService) {}
 
   async handle(event: CreatedTaskEvent) {
-    console.log('yuh.');
     this.eventService.createNext(
       new Event({
         taskID: event.taskID,
+        type: 'createTask',
         payload: {
-          event: 'createTask',
           start: event.start,
           end: event.end,
         },
