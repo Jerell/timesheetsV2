@@ -46,6 +46,7 @@ export class Task extends AggregateRoot {
 
   addWorker(userID: string) {
     if (!this.workers.includes(userID)) this.workers.push(userID);
+    this.parent?.addWorker(userID);
   }
 
   removeWorker(userID: string) {

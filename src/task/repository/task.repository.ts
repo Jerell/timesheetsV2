@@ -37,4 +37,11 @@ export class TaskRepository {
     this.tasks.push(task);
     return task;
   }
+
+  async setParent(taskID: string, parentTaskID: string) {
+    const task = await this.findOneByID(taskID);
+    const parent = await this.findOneByID(parentTaskID);
+    task.parent = parent;
+    return task;
+  }
 }

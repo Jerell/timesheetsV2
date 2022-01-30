@@ -8,9 +8,9 @@ import {
 } from 'class-validator';
 import { TasksService } from 'src/task/tasks.service';
 
-@ValidatorConstraint({ name: 'isAssignedToTask', async: true })
+@ValidatorConstraint({ name: 'isUserAssignedToTask', async: true })
 @Injectable()
-export class IsAssignedToTaskConstraint
+export class IsUserAssignedToTaskConstraint
   implements ValidatorConstraintInterface
 {
   constructor(private readonly taskService: TasksService) {}
@@ -28,18 +28,18 @@ export class IsAssignedToTaskConstraint
   }
 }
 
-export function IsAssignedToTask(
+export function IsUserAssignedToTask(
   taskIDField: string,
   validationOptions?: ValidationOptions,
 ) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
-      name: 'isAssignedToTask',
+      name: 'isUserAssignedToTask',
       target: object.constructor,
       propertyName: propertyName,
       constraints: [taskIDField],
       options: validationOptions,
-      validator: IsAssignedToTaskConstraint,
+      validator: IsUserAssignedToTaskConstraint,
     });
   };
 }

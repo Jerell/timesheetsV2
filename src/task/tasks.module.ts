@@ -2,7 +2,7 @@ import { AzureTableStorageModule } from '@nestjs/azure-database';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { IsExistingTaskConstraint } from 'src/common/validation/is-existing-task';
-import { IsAssignedToTaskConstraint } from 'src/common/validation/is-assigned-to-task';
+import { IsUserAssignedToTaskConstraint } from 'src/common/validation/is-user-assigned-to-task';
 import {
   IsRegistered,
   IsRegisteredConstraint,
@@ -20,16 +20,20 @@ import { TaskRepository } from './repository/task.repository';
 import { TaskController } from './task.controller';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
+import { SetParentTaskHandler } from './commands/handlers/set-parent-task.handler';
+import { SettedParentTaskHandler } from './events/handlers/setted-parent-task.handler';
 
 const CommandHandlers = [
   RecordTimeHandler,
   CreateTaskHandler,
   AddWorkerHandler,
+  SetParentTaskHandler,
 ];
 const EventHandlers = [
   RecordedTimeHandler,
   CreatedTaskHandler,
   AddedWorkerHandler,
+  SettedParentTaskHandler,
 ];
 
 const storage = [
@@ -45,7 +49,7 @@ const storage = [
 
 const constraints = [
   IsRegisteredConstraint,
-  IsAssignedToTaskConstraint,
+  IsUserAssignedToTaskConstraint,
   IsExistingTaskConstraint,
 ];
 

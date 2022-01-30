@@ -10,6 +10,7 @@ import { CreateTaskCommand } from './commands/create-task.command';
 import { IDay } from 'src/common/daynum';
 import { AddWorkerDTO } from './dto/add-worker.dto';
 import { AddWorkerCommand } from './commands/add-worker.command';
+import { SetParentTaskCommand } from './commands/set-parent-task.command';
 
 @Injectable()
 export class TasksService {
@@ -44,6 +45,15 @@ export class TasksService {
   async addWorker(addWorkerDto: AddWorkerDTO) {
     return this.commandBus.execute(
       new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID),
+    );
+  }
+
+  async setParentTask(setParentTaskDto) {
+    return this.commandBus.execute(
+      new SetParentTaskCommand(
+        setParentTaskDto.taskID,
+        setParentTaskDto.parentTaskID,
+      ),
     );
   }
 }
