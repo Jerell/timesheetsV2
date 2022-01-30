@@ -2,7 +2,7 @@ import { AzureTableStorageModule } from '@nestjs/azure-database';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { IsExistingTaskConstraint } from 'src/common/validation/is-existing-task';
-import { IsAssignedToTaskConstraint } from 'src/common/validation/isAssignedToTask';
+import { IsAssignedToTaskConstraint } from 'src/common/validation/is-assigned-to-task';
 import {
   IsRegistered,
   IsRegisteredConstraint,

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 import { IDay } from 'src/common/daynum';
-import { IsDay } from '../../common/validation/isDay';
+import { IsDay } from '../../common/validation/is-day';
 
 export class newTaskDTO {
   @IsString()
