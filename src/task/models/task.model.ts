@@ -52,9 +52,7 @@ export class Task extends AggregateRoot {
   removeWorker(userID: string) {
     if (this.workers.includes(userID)) {
       const index = this.workers.indexOf(userID);
-      if (index !== -1) {
-        this.workers.splice(index, 1);
-      }
+      this.workers.splice(index, 1);
     }
   }
 

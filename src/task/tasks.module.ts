@@ -22,18 +22,22 @@ import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 import { SetParentTaskHandler } from './commands/handlers/set-parent-task.handler';
 import { SettedParentTaskHandler } from './events/handlers/setted-parent-task.handler';
+import { RemoveWorkerHandler } from './commands/handlers/remove-worker.handler';
+import { RemovedWorkerHandler } from './events/handlers/removed-worker.handler';
 
 const CommandHandlers = [
   RecordTimeHandler,
   CreateTaskHandler,
   AddWorkerHandler,
   SetParentTaskHandler,
+  RemoveWorkerHandler,
 ];
 const EventHandlers = [
   RecordedTimeHandler,
   CreatedTaskHandler,
   AddedWorkerHandler,
   SettedParentTaskHandler,
+  RemovedWorkerHandler,
 ];
 
 const storage = [

@@ -11,6 +11,8 @@ import { IDay } from 'src/common/daynum';
 import { AddWorkerDTO } from './dto/add-worker.dto';
 import { AddWorkerCommand } from './commands/add-worker.command';
 import { SetParentTaskCommand } from './commands/set-parent-task.command';
+import { RemoveWorkerDTO } from './dto/remove-worker.dto';
+import { RemoveWorkerCommand } from './commands/remove-worker.command';
 
 @Injectable()
 export class TasksService {
@@ -45,6 +47,12 @@ export class TasksService {
   async addWorker(addWorkerDto: AddWorkerDTO) {
     return this.commandBus.execute(
       new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID),
+    );
+  }
+
+  async removeWorker(removeworkerDto: RemoveWorkerDTO) {
+    return this.commandBus.execute(
+      new RemoveWorkerCommand(removeworkerDto.taskID, removeworkerDto.userID),
     );
   }
 
