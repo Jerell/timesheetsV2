@@ -5,7 +5,11 @@ import { IDay } from 'src/common/daynum';
 
 @Injectable()
 export class TaskRepository {
-  tasks = TASKS.map((t) => new Task(t.id));
+  tasks = TASKS.map((t) => {
+    const task = new Task(t.id);
+    task.addWorker('107125877581320298992');
+    return task;
+  });
 
   async findOneByID(taskID: string) {
     const task = this.tasks.find((task) => task.id === taskID);

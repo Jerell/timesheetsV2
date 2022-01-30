@@ -14,7 +14,6 @@ export class IsRegisteredConstraint implements ValidatorConstraintInterface {
   constructor(private readonly userService: UserService) {}
 
   public async validate(value: string, args: ValidationArguments) {
-    console.log(1, value, this.userService);
     const users = (await this.userService.listAllUsers()).map((u) => u.id);
     return users.includes(value);
   }

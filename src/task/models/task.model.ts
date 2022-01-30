@@ -22,6 +22,7 @@ export class Task extends AggregateRoot {
     hours: Summer;
     cost: Summer;
   };
+  public workers: string[];
 
   constructor(id: string) {
     super();
@@ -36,10 +37,24 @@ export class Task extends AggregateRoot {
       hours: new Summer(),
       cost: new Summer(),
     };
+    this.workers = [];
   }
 
   setID(id: string) {
     this.id = id;
+  }
+
+  addWorker(userID: string) {
+    this.workers.push(userID);
+  }
+
+  removeWorker(userID: string) {
+    if (this.workers.includes(userID)) {
+      const index = this.workers.indexOf(userID);
+      if (index !== -1) {
+        this.workers.splice(index, 1);
+      }
+    }
   }
 
   recordTime(userID: string, n: number, day: IDay) {
@@ -57,7 +72,7 @@ export class Task extends AggregateRoot {
       t.cost.add(c);
       t.workLog[userID].recordTime(n, day);
 
-      t.apply(new RecordedTimeEvent(t.id, userID, n, day));
+      t.apply(new RecordedTimeEvent(t.id, userID, n, day, 'recordTime'));
     };
     record(this);
     record(this.parent);

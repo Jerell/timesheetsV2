@@ -1,6 +1,7 @@
 import { AzureTableStorageModule } from '@nestjs/azure-database';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
+import { IsAssignedToTaskConstraint } from 'src/common/validation/isAssignedToTask';
 import {
   IsRegistered,
   IsRegisteredConstraint,
@@ -20,18 +21,21 @@ import { TasksService } from './tasks.service';
 const CommandHandlers = [RecordTimeHandler, CreateTaskHandler];
 const EventHandlers = [RecordedTimeHandler, CreatedTaskHandler];
 
+const storage = [
+  AzureTableStorageModule.forFeature(Event, {
+    table: 'events2',
+    createTableIfNotExists: true,
+  }),
+  AzureTableStorageModule.forFeature(User, {
+    table: 'users2',
+    createTableIfNotExists: true,
+  }),
+];
+
+const constraints = [IsRegisteredConstraint, IsAssignedToTaskConstraint];
+
 @Module({
-  imports: [
-    CqrsModule,
-    AzureTableStorageModule.forFeature(Event, {
-      table: 'events2',
-      createTableIfNotExists: true,
-    }),
-    AzureTableStorageModule.forFeature(User, {
-      table: 'users2',
-      createTableIfNotExists: true,
-    }),
-  ],
+  imports: [CqrsModule, ...storage],
   controllers: [TasksController, TaskController],
   providers: [
     TasksService,
@@ -40,7 +44,7 @@ const EventHandlers = [RecordedTimeHandler, CreatedTaskHandler];
     ...EventHandlers,
     EventService,
     UserService,
-    IsRegisteredConstraint,
+    ...constraints,
   ],
   exports: [TasksService, ...CommandHandlers, ...EventHandlers],
 })

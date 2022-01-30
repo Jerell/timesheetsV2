@@ -11,23 +11,10 @@ import { IDay } from 'src/common/daynum';
 
 @Injectable()
 export class TasksService {
-  tasks = TASKS.map((t) => new Task(t.id));
-
   constructor(
     private readonly commandBus: CommandBus,
     private repository: TaskRepository,
   ) {}
-
-  async recordTime(recordTimeDto: recordTimeDTO) {
-    return this.commandBus.execute(
-      new RecordTimeCommand(
-        recordTimeDto.taskID,
-        recordTimeDto.userID,
-        recordTimeDto.n,
-        recordTimeDto.day,
-      ),
-    );
-  }
 
   async getTasks() {
     return await this.repository.findAll();
@@ -40,4 +27,17 @@ export class TasksService {
   async create(taskID: string, start: IDay, end: IDay) {
     return this.commandBus.execute(new CreateTaskCommand(taskID, start, end));
   }
+
+  async recordTime(recordTimeDto: recordTimeDTO) {
+    return this.commandBus.execute(
+      new RecordTimeCommand(
+        recordTimeDto.taskID,
+        recordTimeDto.userID,
+        recordTimeDto.n,
+        recordTimeDto.day,
+      ),
+    );
+  }
+
+  async doSomething() {}
 }

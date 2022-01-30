@@ -15,8 +15,9 @@ export class Event {
   @EntityString()
   payload: string;
 
-  constructor({ taskID, payload }: EventDTO = new EventDTO()) {
+  constructor({ taskID, type, payload }: EventDTO = new EventDTO()) {
     this.taskID = taskID;
+    this.type = type;
     this.payload = JSON.stringify(payload);
   }
 }
