@@ -8,6 +8,8 @@ import { RecordTimeCommand } from './commands/record-time.command';
 import { TaskRepository } from './repository/task.repository';
 import { CreateTaskCommand } from './commands/create-task.command';
 import { IDay } from 'src/common/daynum';
+import { AddWorkerDTO } from './dto/add-worker.dto';
+import { AddWorkerCommand } from './commands/add-worker.command';
 
 @Injectable()
 export class TasksService {
@@ -39,5 +41,9 @@ export class TasksService {
     );
   }
 
-  async doSomething() {}
+  async addWorker(addWorkerDto: AddWorkerDTO) {
+    return this.commandBus.execute(
+      new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID),
+    );
+  }
 }

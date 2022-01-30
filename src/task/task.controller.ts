@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { AddWorkerDTO } from './dto/add-worker.dto';
 import { newTaskDTO } from './dto/new-task.dto';
 import { recordTimeDTO } from './dto/record-time.dto';
 import { TasksService } from './tasks.service';
@@ -36,5 +37,11 @@ export class TaskController {
   async submitTime(@Body() recordTimeDto: recordTimeDTO) {
     await this.tasksService.recordTime(recordTimeDto);
     return this.tasksService.getTask(recordTimeDto.taskID);
+  }
+
+  @Post('assign')
+  async assign(@Body() addWorkerDTO: AddWorkerDTO) {
+    await this.tasksService.addWorker(addWorkerDTO);
+    return this.tasksService.getTask(addWorkerDTO.taskID);
   }
 }

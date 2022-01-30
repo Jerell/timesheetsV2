@@ -9,8 +9,10 @@ import {
 import { EventService } from 'src/event/event.service';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+import { AddWorkerHandler } from './commands/handlers/add-worker.handler';
 import { CreateTaskHandler } from './commands/handlers/create-task.handler';
 import { RecordTimeHandler } from './commands/handlers/record-time.handler';
+import { AddedWorkerHandler } from './events/handlers/added-worker.handler';
 import { CreatedTaskHandler } from './events/handlers/created-task.handler';
 import { RecordedTimeHandler } from './events/handlers/recorded-time.handler';
 import { TaskRepository } from './repository/task.repository';
@@ -18,8 +20,16 @@ import { TaskController } from './task.controller';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 
-const CommandHandlers = [RecordTimeHandler, CreateTaskHandler];
-const EventHandlers = [RecordedTimeHandler, CreatedTaskHandler];
+const CommandHandlers = [
+  RecordTimeHandler,
+  CreateTaskHandler,
+  AddWorkerHandler,
+];
+const EventHandlers = [
+  RecordedTimeHandler,
+  CreatedTaskHandler,
+  AddedWorkerHandler,
+];
 
 const storage = [
   AzureTableStorageModule.forFeature(Event, {
