@@ -7,6 +7,7 @@ import {
   SwaggerDocumentOptions,
 } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { useContainer } from 'class-validator';
 
 // the former gets overwritten for some reason
 process.env.AZURE_STORAGE_CONNECTION_STRING =
@@ -15,6 +16,7 @@ process.env.AZURE_STORAGE_CONNECTION_STRING =
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   const config = new DocumentBuilder()
     .setTitle('Timesheets')
