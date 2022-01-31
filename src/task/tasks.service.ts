@@ -18,6 +18,8 @@ import { SetParentTaskDTO } from './dto/set-parent-task.dto';
 import { SetStartCommand } from './commands/set-start.command';
 import { SetEndDTO } from './dto/set-end.dto';
 import { SetEndCommand } from './commands/set-end.command';
+import { SetWorkerRateDTO } from './dto/set-worker-rate.dto';
+import { SetWorkerRateCommand } from './commands/set-worker-rate.command';
 
 @Injectable()
 export class TasksService {
@@ -52,6 +54,16 @@ export class TasksService {
   async addWorker(addWorkerDto: AddWorkerDTO) {
     return this.commandBus.execute(
       new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID),
+    );
+  }
+
+  async setWorkerRate(setWorkerRateDto: SetWorkerRateDTO) {
+    return this.commandBus.execute(
+      new SetWorkerRateCommand(
+        setWorkerRateDto.taskID,
+        setWorkerRateDto.userID,
+        setWorkerRateDto.rate,
+      ),
     );
   }
 

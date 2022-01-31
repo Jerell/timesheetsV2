@@ -15,6 +15,7 @@ import { RemoveWorkerDTO } from './dto/remove-worker.dto';
 import { SetEndDTO } from './dto/set-end.dto';
 import { SetParentTaskDTO } from './dto/set-parent-task.dto';
 import { SetStartDTO } from './dto/set-start.dto';
+import { SetWorkerRateDTO } from './dto/set-worker-rate.dto';
 import { TasksService } from './tasks.service';
 
 @Controller('task')
@@ -70,5 +71,11 @@ export class TaskController {
   async setEnd(@Body() setEndDto: SetEndDTO) {
     await this.tasksService.setEnd(setEndDto);
     return this.tasksService.getTask(setEndDto.taskID);
+  }
+
+  @Post('setWorkerRate')
+  async setWorkerRate(@Body() setWorkerRateDto: SetWorkerRateDTO) {
+    await this.tasksService.setWorkerRate(setWorkerRateDto);
+    return this.tasksService.getTask(setWorkerRateDto.taskID);
   }
 }

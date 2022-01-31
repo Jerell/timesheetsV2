@@ -28,6 +28,8 @@ import { SetStartHandler } from './commands/handlers/set-start.handler';
 import { SettedStartHandler } from './events/handlers/setted-start.handler';
 import { SetEndHandler } from './commands/handlers/set-end.handler';
 import { SettedEndHandler } from './events/handlers/setted-end.handler';
+import { SetWorkerRateHandler } from './commands/handlers/set-worker-rate.handler';
+import { SettedWorkerRateHandler } from './events/handlers/setted-worker-rate.handler';
 
 const CommandHandlers = [
   RecordTimeHandler,
@@ -37,6 +39,7 @@ const CommandHandlers = [
   RemoveWorkerHandler,
   SetStartHandler,
   SetEndHandler,
+  SetWorkerRateHandler,
 ];
 const EventHandlers = [
   RecordedTimeHandler,
@@ -46,6 +49,7 @@ const EventHandlers = [
   RemovedWorkerHandler,
   SettedStartHandler,
   SettedEndHandler,
+  SettedWorkerRateHandler,
 ];
 
 const storage = [

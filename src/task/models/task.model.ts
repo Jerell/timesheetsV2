@@ -1,5 +1,5 @@
 import { IDay, DayNum } from '../../common/daynum';
-import { IPerson, Person } from '../../person/person';
+import { IPerson, Person } from '../../person/person.model';
 import { Summer } from '../../common/summer';
 import initKey from '../../common/initKey';
 import { AggregateRoot } from '@nestjs/cqrs';
@@ -56,6 +56,11 @@ export class Task extends AggregateRoot {
       const index = this.workers.indexOf(userID);
       this.workers.splice(index, 1);
     }
+  }
+
+  setWorkerRate(userID: string, rate: number) {
+    this.addWorker(userID);
+    this.rates[userID] = rate;
   }
 
   recordTime(userID: string, n: number, day: IDay) {
