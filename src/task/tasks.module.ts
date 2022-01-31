@@ -30,6 +30,8 @@ import { SetEndHandler } from './commands/handlers/set-end.handler';
 import { SettedEndHandler } from './events/handlers/setted-end.handler';
 import { SetWorkerRateHandler } from './commands/handlers/set-worker-rate.handler';
 import { SettedWorkerRateHandler } from './events/handlers/setted-worker-rate.handler';
+import { SetPriceHandler } from './commands/handlers/set-price.handler';
+import { SettedPriceHandler } from './events/handlers/setted-price.handler';
 
 const CommandHandlers = [
   RecordTimeHandler,
@@ -40,6 +42,7 @@ const CommandHandlers = [
   SetStartHandler,
   SetEndHandler,
   SetWorkerRateHandler,
+  SetPriceHandler,
 ];
 const EventHandlers = [
   RecordedTimeHandler,
@@ -50,6 +53,7 @@ const EventHandlers = [
   SettedStartHandler,
   SettedEndHandler,
   SettedWorkerRateHandler,
+  SettedPriceHandler,
 ];
 
 const storage = [

@@ -20,6 +20,8 @@ import { SetEndDTO } from './dto/set-end.dto';
 import { SetEndCommand } from './commands/set-end.command';
 import { SetWorkerRateDTO } from './dto/set-worker-rate.dto';
 import { SetWorkerRateCommand } from './commands/set-worker-rate.command';
+import { SetPriceDTO } from './dto/set-price.dto';
+import { SetPriceCommand } from './commands/set-price.command';
 
 @Injectable()
 export class TasksService {
@@ -91,6 +93,16 @@ export class TasksService {
   async setEnd(setEndDto: SetEndDTO) {
     return this.commandBus.execute(
       new SetEndCommand(setEndDto.taskID, setEndDto.day),
+    );
+  }
+
+  async setPrice(setPriceDto: SetPriceDTO) {
+    return this.commandBus.execute(
+      new SetPriceCommand(
+        setPriceDto.taskID,
+        setPriceDto.thing,
+        setPriceDto.price,
+      ),
     );
   }
 }
