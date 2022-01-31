@@ -25,8 +25,7 @@ export class IsDayConstraint implements ValidatorConstraintInterface {
 
   public defaultMessage(args: ValidationArguments) {
     // Set the default error message here
-    const [relatedPropertyName] = args.constraints;
-    return `$property be a string in the format yyyy-MM-dd`;
+    return `$property must be a string in the format yyyy-MM-dd`;
   }
 }
 

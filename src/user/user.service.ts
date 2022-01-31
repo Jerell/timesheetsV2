@@ -6,7 +6,6 @@ import {
   AzureTableStorageResponse,
 } from '@nestjs/azure-database';
 import { User } from './user.entity';
-import { UserDTO } from './user.dto';
 const Fuse = require('fuse.js');
 
 @Injectable()
@@ -22,6 +21,10 @@ export class UserService {
 
   async findAll(): Promise<AzureTableStorageResultList<User>> {
     return this.userRepository.findAll();
+  }
+
+  async count(): Promise<number> {
+    return (await this.findAll()).entries.length;
   }
 
   async searchByName(name: string): Promise<AzureTableStorageResultList<User>> {

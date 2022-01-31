@@ -3,7 +3,6 @@ import {
   EntityRowKey,
   EntityString,
   EntityBoolean,
-  EntityInt32,
 } from '@nestjs/azure-database';
 
 @EntityPartitionKey('User')
