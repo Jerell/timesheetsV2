@@ -14,6 +14,7 @@ import { recordTimeDTO } from './dto/record-time.dto';
 import { RemoveWorkerDTO } from './dto/remove-worker.dto';
 import { SetEndDTO } from './dto/set-end.dto';
 import { SetParentTaskDTO } from './dto/set-parent-task.dto';
+import { SetPriceDTO } from './dto/set-price.dto';
 import { SetStartDTO } from './dto/set-start.dto';
 import { SetWorkerRateDTO } from './dto/set-worker-rate.dto';
 import { TasksService } from './tasks.service';
@@ -77,5 +78,11 @@ export class TaskController {
   async setWorkerRate(@Body() setWorkerRateDto: SetWorkerRateDTO) {
     await this.tasksService.setWorkerRate(setWorkerRateDto);
     return this.tasksService.getTask(setWorkerRateDto.taskID);
+  }
+
+  @Post('expense/price')
+  async setPrice(@Body() setPriceDto: SetPriceDTO) {
+    await this.tasksService.setPrice(setPriceDto);
+    return this.tasksService.getTask(setPriceDto.taskID);
   }
 }
