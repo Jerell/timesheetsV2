@@ -11,6 +11,9 @@ export class Task extends AggregateRoot {
   public cost: Summer;
   public workLog: { [person: string]: IPerson };
   public rates: { [person: string]: number };
+  public prices: {
+    [thing: string]: number;
+  };
   public expenses: {
     [thing: string]: {
       quantity: Summer;
@@ -40,6 +43,7 @@ export class Task extends AggregateRoot {
       cost: new Summer(),
     };
     this.workers = [];
+    this.prices = {};
   }
 
   setID(id: string) {
@@ -84,9 +88,14 @@ export class Task extends AggregateRoot {
     record(this.parent);
   }
 
-  addExpense(thing: string, price: number, quantity: number, day: IDay) {
+  setPrice(thing: string, price: number) {
+    this.prices[thing] = price;
+  }
+
+  addExpense(thing: string, quantity: number, day: IDay) {
     const q = new DayNum(quantity, day);
-    const c = new DayNum(quantity * price, day);
+    initKey(this.prices, thing);
+    const c = new DayNum(quantity * this.prices[thing], day);
 
     const record = (t: Task) => {
       if (!t) return;

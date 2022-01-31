@@ -22,17 +22,20 @@ describe('expenses', () => {
   it('should set the cost totals appropriately', () => {
     const job = new Task('taskname');
 
-    job.addExpense('OLGA', 19060, 0.5, '2022-01-22');
-    expect(job.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
-    expect(job.cost.total).toBe(0.5 * 19060);
+    const price = 19060;
+    job.setPrice('OLGA', price);
 
-    job.addExpense('OLGA', 19060, 1, '2022-01-23');
-    expect(job.cost.total).toBe(1.5 * 19060);
-    expect(job.expenses['OLGA'].cost.total).toBe(1.5 * 19060);
+    job.addExpense('OLGA', 0.5, '2022-01-22');
+    expect(job.expenses['OLGA'].cost.total).toBe(0.5 * price);
+    expect(job.cost.total).toBe(0.5 * price);
 
-    expect(job.cost.before('2022-01-23').total).toBe(0.5 * 19060);
+    job.addExpense('OLGA', 1, '2022-01-23');
+    expect(job.cost.total).toBe(1.5 * price);
+    expect(job.expenses['OLGA'].cost.total).toBe(1.5 * price);
+
+    expect(job.cost.before('2022-01-23').total).toBe(0.5 * price);
     expect(job.expenses['OLGA'].cost.before('2022-01-23').total).toBe(
-      0.5 * 19060,
+      0.5 * price,
     );
   });
 });
@@ -46,10 +49,14 @@ describe('parent', () => {
     ws7.parent = project;
     ws8.parent = project;
 
-    ws7.addExpense('OLGA', 19060, 0.5, '2022-01-22');
-    expect(ws7.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
+    const price = 19060;
+
+    ws7.setPrice('OLGA', price);
+
+    ws7.addExpense('OLGA', 0.5, '2022-01-22');
+    expect(ws7.expenses['OLGA'].cost.total).toBe(0.5 * price);
     expect(ws8.cost.total).toBe(0);
-    expect(project.expenses['OLGA'].cost.total).toBe(0.5 * 19060);
+    expect(project.expenses['OLGA'].cost.total).toBe(0.5 * price);
 
     ws8.rates['jim'] = 5;
     ws8.rates['jom'] = 2;
@@ -58,7 +65,7 @@ describe('parent', () => {
     ws8.recordTime('jom', 1, '2022-01-22');
 
     expect(ws8.cost.total).toBe(32);
-    expect(project.cost.total).toBe(32 + 0.5 * 19060);
+    expect(project.cost.total).toBe(32 + 0.5 * price);
     expect(project.hours.total).toBe(7);
     expect(ws8.hours.total).toBe(7);
     expect(ws7.hours.total).toBe(0);
