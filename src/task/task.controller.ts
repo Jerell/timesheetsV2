@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { AddExpenseDTO } from './dto/add-expense.dto';
 import { AddWorkerDTO } from './dto/add-worker.dto';
 import { newTaskDTO } from './dto/new-task.dto';
 import { recordTimeDTO } from './dto/record-time.dto';
@@ -42,13 +43,13 @@ export class TaskController {
   @Post('submit')
   async submitTime(@Body() recordTimeDto: recordTimeDTO) {
     await this.tasksService.recordTime(recordTimeDto);
-    return this.tasksService.getTask(recordTimeDto.taskID);
+    return await this.tasksService.getTask(recordTimeDto.taskID);
   }
 
   @Post('assign')
   async assign(@Body() addWorkerDTO: AddWorkerDTO) {
     await this.tasksService.addWorker(addWorkerDTO);
-    return this.tasksService.getTask(addWorkerDTO.taskID);
+    return await this.tasksService.getTask(addWorkerDTO.taskID);
   }
 
   @Post('unassign')
@@ -59,30 +60,36 @@ export class TaskController {
   @Post('setParent')
   async setParent(@Body() setParentTaskDto: SetParentTaskDTO) {
     await this.tasksService.setParentTask(setParentTaskDto);
-    return this.tasksService.getTask(setParentTaskDto.taskID);
+    return await this.tasksService.getTask(setParentTaskDto.taskID);
   }
 
   @Post('setStart')
   async setStart(@Body() setStartDto: SetStartDTO) {
     await this.tasksService.setStart(setStartDto);
-    return this.tasksService.getTask(setStartDto.taskID);
+    return await this.tasksService.getTask(setStartDto.taskID);
   }
 
   @Post('setEnd')
   async setEnd(@Body() setEndDto: SetEndDTO) {
     await this.tasksService.setEnd(setEndDto);
-    return this.tasksService.getTask(setEndDto.taskID);
+    return await this.tasksService.getTask(setEndDto.taskID);
   }
 
   @Post('setWorkerRate')
   async setWorkerRate(@Body() setWorkerRateDto: SetWorkerRateDTO) {
     await this.tasksService.setWorkerRate(setWorkerRateDto);
-    return this.tasksService.getTask(setWorkerRateDto.taskID);
+    return await this.tasksService.getTask(setWorkerRateDto.taskID);
   }
 
   @Post('expense/price')
   async setPrice(@Body() setPriceDto: SetPriceDTO) {
     await this.tasksService.setPrice(setPriceDto);
-    return this.tasksService.getTask(setPriceDto.taskID);
+    return await this.tasksService.getTask(setPriceDto.taskID);
+  }
+
+  @Post('expense/add')
+  async addExpense(@Body() addExpenseDto: AddExpenseDTO) {
+    await this.tasksService.addExpense(addExpenseDto);
+    return await this.tasksService.getTask(addExpenseDto.taskID);
   }
 }

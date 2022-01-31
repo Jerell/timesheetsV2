@@ -22,6 +22,8 @@ import { SetWorkerRateDTO } from './dto/set-worker-rate.dto';
 import { SetWorkerRateCommand } from './commands/set-worker-rate.command';
 import { SetPriceDTO } from './dto/set-price.dto';
 import { SetPriceCommand } from './commands/set-price.command';
+import { AddExpenseDTO } from './dto/add-expense.dto';
+import { AddExpenseCommand } from './commands/add-expense.command';
 
 @Injectable()
 export class TasksService {
@@ -102,6 +104,17 @@ export class TasksService {
         setPriceDto.taskID,
         setPriceDto.thing,
         setPriceDto.price,
+      ),
+    );
+  }
+
+  async addExpense(addExpenseDto: AddExpenseDTO) {
+    return this.commandBus.execute(
+      new AddExpenseCommand(
+        addExpenseDto.taskID,
+        addExpenseDto.thing,
+        addExpenseDto.quantity,
+        addExpenseDto.day,
       ),
     );
   }
