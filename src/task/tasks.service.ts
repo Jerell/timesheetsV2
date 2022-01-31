@@ -16,6 +16,8 @@ import { RemoveWorkerCommand } from './commands/remove-worker.command';
 import { SetStartDTO } from './dto/set-start.dto';
 import { SetParentTaskDTO } from './dto/set-parent-task.dto';
 import { SetStartCommand } from './commands/set-start.command';
+import { SetEndDTO } from './dto/set-end.dto';
+import { SetEndCommand } from './commands/set-end.command';
 
 @Injectable()
 export class TasksService {
@@ -71,6 +73,12 @@ export class TasksService {
   async setStart(setStartDto: SetStartDTO) {
     return this.commandBus.execute(
       new SetStartCommand(setStartDto.taskID, setStartDto.day),
+    );
+  }
+
+  async setEnd(setEndDto: SetEndDTO) {
+    return this.commandBus.execute(
+      new SetEndCommand(setEndDto.taskID, setEndDto.day),
     );
   }
 }

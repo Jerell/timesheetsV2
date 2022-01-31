@@ -26,6 +26,8 @@ import { RemoveWorkerHandler } from './commands/handlers/remove-worker.handler';
 import { RemovedWorkerHandler } from './events/handlers/removed-worker.handler';
 import { SetStartHandler } from './commands/handlers/set-start.handler';
 import { SettedStartHandler } from './events/handlers/setted-start.handler';
+import { SetEndHandler } from './commands/handlers/set-end.handler';
+import { SettedEndHandler } from './events/handlers/setted-end.handler';
 
 const CommandHandlers = [
   RecordTimeHandler,
@@ -34,6 +36,7 @@ const CommandHandlers = [
   SetParentTaskHandler,
   RemoveWorkerHandler,
   SetStartHandler,
+  SetEndHandler,
 ];
 const EventHandlers = [
   RecordedTimeHandler,
@@ -42,6 +45,7 @@ const EventHandlers = [
   SettedParentTaskHandler,
   RemovedWorkerHandler,
   SettedStartHandler,
+  SettedEndHandler,
 ];
 
 const storage = [
