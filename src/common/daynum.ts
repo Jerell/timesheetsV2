@@ -1,4 +1,11 @@
-import { format, getDay, add, isBefore, isAfter } from 'date-fns';
+import {
+  format,
+  getDay,
+  add,
+  isBefore,
+  isAfter,
+  addMilliseconds,
+} from 'date-fns';
 
 export type IDay = `20${'2' | '3'}${number}-${
   | '01'
@@ -56,14 +63,17 @@ export class DayNum implements IDayNum {
   public readonly day: IDay;
   public readonly week: string;
   public readonly num: number;
+  private readonly timezoneOffsetMs: number =
+    new Date().getTimezoneOffset() * 1000 * 60;
 
   constructor(num: number, day?: IDay) {
     this.num = num;
     if (day) {
       this.day = day;
-      this.date = new Date(day);
+
+      this.date = addMilliseconds(new Date(day), this.timezoneOffsetMs);
     } else {
-      this.date = new Date();
+      this.date = addMilliseconds(new Date(), this.timezoneOffsetMs);
       this.day = format(this.date, 'yyyy-MM-dd') as IDay;
     }
 
@@ -74,10 +84,12 @@ export class DayNum implements IDayNum {
   }
 
   isBefore(date: Date) {
+    date = addMilliseconds(date, this.timezoneOffsetMs);
     return isBefore(this.date, date);
   }
 
   isAfter(date: Date) {
+    date = addMilliseconds(date, this.timezoneOffsetMs);
     return isAfter(this.date, date);
   }
 }

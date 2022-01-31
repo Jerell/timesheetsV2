@@ -2,7 +2,7 @@ import { DayNum } from './daynum';
 
 describe('end', () => {
   it('returns the correct end date (saturday)', () => {
-    const dn = new DayNum(9, '2022-01-23');
+    const dn = new DayNum(9, '2022-01-22');
     expect(dn.week).toBe('2022-01-28');
   });
 
