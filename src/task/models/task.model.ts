@@ -23,6 +23,8 @@ export class Task extends AggregateRoot {
     cost: Summer;
   };
   public workers: string[];
+  public start?: IDay;
+  public end?: IDay;
 
   constructor(id: string) {
     super();
@@ -105,5 +107,13 @@ export class Task extends AggregateRoot {
   markDay(day: IDay) {
     this.addBudget('hours', 0, day);
     this.addBudget('cost', 0, day);
+  }
+
+  setStart(day: IDay) {
+    this.start = day;
+  }
+
+  setEnd(day: IDay) {
+    this.end = day;
   }
 }

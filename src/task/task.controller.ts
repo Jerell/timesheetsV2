@@ -13,6 +13,7 @@ import { newTaskDTO } from './dto/new-task.dto';
 import { recordTimeDTO } from './dto/record-time.dto';
 import { RemoveWorkerDTO } from './dto/remove-worker.dto';
 import { SetParentTaskDTO } from './dto/set-parent-task.dto';
+import { SetStartDTO } from './dto/set-start.dto';
 import { TasksService } from './tasks.service';
 
 @Controller('task')
@@ -56,5 +57,10 @@ export class TaskController {
   async setParent(@Body() setParentTaskDto: SetParentTaskDTO) {
     await this.tasksService.setParentTask(setParentTaskDto);
     return this.tasksService.getTask(setParentTaskDto.taskID);
+  }
+
+  @Post('setStart')
+  async setStart(@Body() setStartDto: SetStartDTO) {
+    await this.tasksService.setStart(setStartDto);
   }
 }
