@@ -22,7 +22,7 @@ export class EventService {
     return this.eventRepository.findAll();
   }
 
-  async count(taskID?: string): Promise<number> {
+  async count(): Promise<number> {
     return (await this.findAll()).entries.length;
   }
 

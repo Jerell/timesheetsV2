@@ -81,11 +81,11 @@ export class Task extends AggregateRoot {
       t.hours.add(h);
       t.cost.add(c);
       t.workLog[userID].recordTime(n, day);
-
-      t.apply(new RecordedTimeEvent(t.id, userID, n, day, 'recordTime'));
     };
     record(this);
     record(this.parent);
+
+    this.apply(new RecordedTimeEvent(this.id, userID, n, day, 'recordTime'));
   }
 
   setPrice(thing: string, price: number) {
@@ -115,7 +115,7 @@ export class Task extends AggregateRoot {
   addBudget(type: 'hours' | 'cost', n: number, day: IDay) {
     const b = new DayNum(n, day);
     this.budget[type].add(b);
-    this.parent?.budget[type].add(b);
+    this.parent?.addBudget(type, n, day);
   }
 
   markDay(day: IDay) {
