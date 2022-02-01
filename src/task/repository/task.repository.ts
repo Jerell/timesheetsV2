@@ -1,20 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Task } from '../models/task.model';
-import { TASKS } from 'src/mocks/tasks.mock';
 import { IDay } from 'src/common/daynum';
 import { ReadService } from '../models/read.service';
 
 @Injectable()
 export class TaskRepository {
   constructor(private readonly readService: ReadService) {}
-
-  // tasks = TASKS.map((t) => {
-  //   const task = new Task(t.id);
-  //   task.addWorker('107125877581320298992');
-  //   return task;
-  // });
-
-  // a = this.readService.read();
   tasks = this.readService.read();
 
   async findOneByID(taskID: string) {
