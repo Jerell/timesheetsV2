@@ -1,8 +1,5 @@
 import { Injectable, HttpException } from '@nestjs/common';
-import { TASKS } from '../mocks/tasks.mock';
-import { newTaskDTO } from './dto/new-task.dto';
-import { Task } from './models/task.model';
-import { EventBus, CommandBus } from '@nestjs/cqrs';
+import { CommandBus } from '@nestjs/cqrs';
 import { recordTimeDTO } from './dto/record-time.dto';
 import { RecordTimeCommand } from './commands/record-time.command';
 import { TaskRepository } from './repository/task.repository';

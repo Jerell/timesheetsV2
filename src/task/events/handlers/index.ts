@@ -1,4 +1,6 @@
 import { AddedExpenseHandler } from './added-expense.handler';
+import { AddedWorkerHandler } from './added-worker.handler';
+import { CreatedTaskHandler } from './created-task.handler';
 import { RecordedTimeHandler } from './recorded-time.handler';
 import { RemovedWorkerHandler } from './removed-worker.handler';
 import { SettedEndHandler } from './setted-end.handler';
@@ -8,12 +10,14 @@ import { SettedStartHandler } from './setted-start.handler';
 import { SettedWorkerRateHandler } from './setted-worker-rate.handler';
 
 export default [
-  AddedExpenseHandler,
-  RecordedTimeHandler,
-  RemovedWorkerHandler,
-  SettedEndHandler,
+  CreatedTaskHandler,
   SettedParentTaskHandler,
-  SettedPriceHandler,
   SettedStartHandler,
+  SettedEndHandler,
+  AddedWorkerHandler,
+  RemovedWorkerHandler,
   SettedWorkerRateHandler,
+  RecordedTimeHandler,
+  SettedPriceHandler,
+  AddedExpenseHandler,
 ];

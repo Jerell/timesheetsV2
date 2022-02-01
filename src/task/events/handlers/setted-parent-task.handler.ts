@@ -12,6 +12,7 @@ export class SettedParentTaskHandler
   constructor(private readonly eventService: EventService) {}
 
   async handle(event: SettedParentTaskEvent) {
+    console.log(1, 'yuh');
     this.eventService.createNext(
       new Event({
         taskID: event.taskID,

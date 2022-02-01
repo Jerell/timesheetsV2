@@ -14,6 +14,7 @@ import { TasksService } from './tasks.service';
 
 import CommandHandlers from './commands/handlers';
 import EventHandlers from './events/handlers';
+import { ReadService } from './models/read.service';
 
 const storage = [
   AzureTableStorageModule.forFeature(Event, {
@@ -42,6 +43,7 @@ const constraints = [
     ...EventHandlers,
     EventService,
     UserService,
+    ReadService,
     ...constraints,
   ],
   exports: [TasksService, ...CommandHandlers, ...EventHandlers],
