@@ -5,10 +5,17 @@ services:
     volumes:
       - "./traefik:/etc/traefik"
       - "/var/run/docker.sock:/var/run/docker.sock"
-    network_mode: host
+    ports:
+      - 8080:8080
+      - 443:443
+      - 80:80
   azurite:
     image: mcr.microsoft.com/azure-storage/azurite
     ports:
       - 10000:10000
       - 10001:10001
       - 10002:10002
+  # api:
+  #   build:
+  #     context: ../../api
+  #     dockerfile: Dockerfile
