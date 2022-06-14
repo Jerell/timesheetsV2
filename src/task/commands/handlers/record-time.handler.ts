@@ -8,13 +8,13 @@ import { RecordTimeCommand } from '../record-time.command';
 export class RecordTimeHandler implements ICommandHandler<RecordTimeCommand> {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: RecordTimeCommand) {
     const { taskID, userID, n, day } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.findOneByID(taskID),
+      await this.repository.findOneByID(taskID)
     );
     task.recordTime(userID, n, day);
     task.commit();

@@ -18,7 +18,7 @@ export class SettedPriceHandler implements IEventHandler<SettedPriceEvent> {
           thing: event.thing,
           price: event.price,
         },
-      }),
+      })
     );
   }
 }

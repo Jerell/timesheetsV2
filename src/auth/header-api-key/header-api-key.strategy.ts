@@ -6,7 +6,7 @@ import Strategy from 'passport-headerapikey';
 @Injectable()
 export class HeaderApiKeyStrategy extends PassportStrategy(
   Strategy,
-  'api-key',
+  'api-key'
 ) {
   constructor(private readonly configService: ConfigService) {
     super({ header: 'X-API-KEY', prefix: '' }, true, async (apiKey, done) => {

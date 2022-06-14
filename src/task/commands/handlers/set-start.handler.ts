@@ -8,13 +8,13 @@ import { SetStartCommand } from '../set-start.command';
 export class SetStartHandler implements ICommandHandler<SetStartCommand> {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: SetStartCommand) {
     const { taskID, day } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.findOneByID(taskID),
+      await this.repository.findOneByID(taskID)
     );
     task.setStart(day);
     task.commit();

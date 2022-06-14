@@ -20,7 +20,7 @@ export class SettedWorkerRateHandler
           userID: event.userID,
           rate: event.rate,
         },
-      }),
+      })
     );
   }
 }

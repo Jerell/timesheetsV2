@@ -46,7 +46,7 @@ export class UserController {
   @Post()
   async createUser(
     @Body()
-    userData: UserDTO,
+    userData: UserDTO
   ) {
     try {
       const user = new User();
@@ -78,7 +78,7 @@ export class UserController {
   @Patch(':rowKey')
   async updateUserDetails(
     @Param('rowKey') rowKey,
-    @Body() userData: Partial<UserDTO>,
+    @Body() userData: Partial<UserDTO>
   ) {
     try {
       const oldProps = await this.getUser(rowKey);

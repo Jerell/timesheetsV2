@@ -17,7 +17,7 @@ export class SettedStartHandler implements IEventHandler<SettedStartEvent> {
         payload: {
           day: event.day,
         },
-      }),
+      })
     );
   }
 }

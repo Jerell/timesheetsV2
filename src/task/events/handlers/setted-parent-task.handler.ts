@@ -20,7 +20,7 @@ export class SettedParentTaskHandler
         payload: {
           parentTaskID: event.parentTaskID,
         },
-      }),
+      })
     );
   }
 }

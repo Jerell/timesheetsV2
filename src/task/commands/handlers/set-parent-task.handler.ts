@@ -11,14 +11,14 @@ export class SetParentTaskHandler
 {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: SetParentTaskCommand) {
     console.log('!');
     const { taskID, parentTaskID } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.findOneByID(taskID),
+      await this.repository.findOneByID(taskID)
     );
     const parent = await this.repository.findOneByID(parentTaskID);
     task.parent = parent;

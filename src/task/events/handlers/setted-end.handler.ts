@@ -17,7 +17,7 @@ export class SettedEndHandler implements IEventHandler<SettedEndEvent> {
         payload: {
           day: event.day,
         },
-      }),
+      })
     );
   }
 }

@@ -6,6 +6,6 @@ export class RecordedTimeEvent {
     public readonly userID: string,
     public readonly n: number,
     public readonly day: IDay,
-    public readonly type: string,
+    public readonly type: string
   ) {}
 }

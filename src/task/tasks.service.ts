@@ -26,7 +26,7 @@ import { AddExpenseCommand } from './commands/add-expense.command';
 export class TasksService {
   constructor(
     private readonly commandBus: CommandBus,
-    private repository: TaskRepository,
+    private repository: TaskRepository
   ) {}
 
   async getTasks() {
@@ -47,14 +47,14 @@ export class TasksService {
         recordTimeDto.taskID,
         recordTimeDto.userID,
         recordTimeDto.n,
-        recordTimeDto.day,
-      ),
+        recordTimeDto.day
+      )
     );
   }
 
   async addWorker(addWorkerDto: AddWorkerDTO) {
     return this.commandBus.execute(
-      new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID),
+      new AddWorkerCommand(addWorkerDto.taskID, addWorkerDto.userID)
     );
   }
 
@@ -63,14 +63,14 @@ export class TasksService {
       new SetWorkerRateCommand(
         setWorkerRateDto.taskID,
         setWorkerRateDto.userID,
-        setWorkerRateDto.rate,
-      ),
+        setWorkerRateDto.rate
+      )
     );
   }
 
   async removeWorker(removeworkerDto: RemoveWorkerDTO) {
     return this.commandBus.execute(
-      new RemoveWorkerCommand(removeworkerDto.taskID, removeworkerDto.userID),
+      new RemoveWorkerCommand(removeworkerDto.taskID, removeworkerDto.userID)
     );
   }
 
@@ -78,20 +78,20 @@ export class TasksService {
     return this.commandBus.execute(
       new SetParentTaskCommand(
         setParentTaskDto.taskID,
-        setParentTaskDto.parentTaskID,
-      ),
+        setParentTaskDto.parentTaskID
+      )
     );
   }
 
   async setStart(setStartDto: SetStartDTO) {
     return this.commandBus.execute(
-      new SetStartCommand(setStartDto.taskID, setStartDto.day),
+      new SetStartCommand(setStartDto.taskID, setStartDto.day)
     );
   }
 
   async setEnd(setEndDto: SetEndDTO) {
     return this.commandBus.execute(
-      new SetEndCommand(setEndDto.taskID, setEndDto.day),
+      new SetEndCommand(setEndDto.taskID, setEndDto.day)
     );
   }
 
@@ -100,8 +100,8 @@ export class TasksService {
       new SetPriceCommand(
         setPriceDto.taskID,
         setPriceDto.thing,
-        setPriceDto.price,
-      ),
+        setPriceDto.price
+      )
     );
   }
 
@@ -111,8 +111,8 @@ export class TasksService {
         addExpenseDto.taskID,
         addExpenseDto.thing,
         addExpenseDto.quantity,
-        addExpenseDto.day,
-      ),
+        addExpenseDto.day
+      )
     );
   }
 }

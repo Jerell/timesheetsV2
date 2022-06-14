@@ -30,7 +30,7 @@ export class IsUserAssignedToTaskConstraint
 
 export function IsUserAssignedToTask(
   taskIDField: string,
-  validationOptions?: ValidationOptions,
+  validationOptions?: ValidationOptions
 ) {
   return function (object: Object, propertyName: string) {
     registerDecorator({

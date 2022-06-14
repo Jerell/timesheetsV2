@@ -22,7 +22,7 @@ export class IsNotEqualToConstraint implements ValidatorConstraintInterface {
 
 export function IsNotEqualTo(
   otherField: string,
-  validationOptions?: ValidationOptions,
+  validationOptions?: ValidationOptions
 ) {
   return function (object: Object, propertyName: string) {
     registerDecorator({

@@ -11,7 +11,7 @@ import { Event } from './event.entity';
 export class EventService {
   constructor(
     @InjectRepository(Event)
-    private readonly eventRepository: Repository<Event>,
+    private readonly eventRepository: Repository<Event>
   ) {}
 
   async find(rowKey: string, event: Event): Promise<Event> {
@@ -41,7 +41,7 @@ export class EventService {
 
   async delete(
     rowKey: string,
-    event: Event,
+    event: Event
   ): Promise<AzureTableStorageResponse> {
     return this.eventRepository.delete(rowKey, event);
   }

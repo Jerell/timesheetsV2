@@ -3,6 +3,6 @@ export class SettedWorkerRateEvent {
     public readonly taskID: string,
     public readonly userID: string,
     public readonly rate: number,
-    public readonly type: string,
+    public readonly type: string
   ) {}
 }

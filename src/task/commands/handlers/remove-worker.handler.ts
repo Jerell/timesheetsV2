@@ -10,13 +10,13 @@ export class RemoveWorkerHandler
 {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: RemoveWorkerCommand) {
     const { taskID, userID } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.findOneByID(taskID),
+      await this.repository.findOneByID(taskID)
     );
     task.removeWorker(userID);
     task.commit();

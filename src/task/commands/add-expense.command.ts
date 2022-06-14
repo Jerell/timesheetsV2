@@ -5,6 +5,6 @@ export class AddExpenseCommand {
     public readonly taskID: string,
     public readonly thing: string,
     public readonly quantity: number,
-    public readonly day: IDay,
+    public readonly day: IDay
   ) {}
 }

@@ -19,7 +19,7 @@ export class RecordedTimeHandler implements IEventHandler<RecordedTimeEvent> {
           n: event.n,
           day: event.day,
         },
-      }),
+      })
     );
   }
 }

@@ -17,7 +17,7 @@ export class AddedWorkerHandler implements IEventHandler<AddedWorkerEvent> {
         payload: {
           userID: event.userID,
         },
-      }),
+      })
     );
   }
 }

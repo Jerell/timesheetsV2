@@ -35,7 +35,7 @@ describe('expenses', () => {
 
     expect(job.cost.before('2022-01-23').total).toBe(0.5 * price);
     expect(job.expenses['OLGA'].cost.before('2022-01-23').total).toBe(
-      0.5 * price,
+      0.5 * price
     );
   });
 });

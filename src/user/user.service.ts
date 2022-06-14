@@ -12,7 +12,7 @@ const Fuse = require('fuse.js');
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    private readonly userRepository: Repository<User>
   ) {}
 
   async find(rowKey: string, user: User): Promise<User> {

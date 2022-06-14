@@ -15,13 +15,13 @@ import { CreateTaskCommand } from '../create-task.command';
 export class CreateTaskHandler implements ICommandHandler<CreateTaskCommand> {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: CreateTaskCommand) {
     const { taskID, start, end } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.create(taskID, start, end),
+      await this.repository.create(taskID, start, end)
     );
 
     task.setID(taskID);

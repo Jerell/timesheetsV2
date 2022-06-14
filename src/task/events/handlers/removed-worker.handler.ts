@@ -17,7 +17,7 @@ export class RemovedWorkerHandler implements IEventHandler<RemovedWorkerEvent> {
         payload: {
           userID: event.userID,
         },
-      }),
+      })
     );
   }
 }

@@ -35,7 +35,7 @@ export class TaskController {
     await this.tasksService.create(
       newTaskDto.taskID,
       newTaskDto.start,
-      newTaskDto.end,
+      newTaskDto.end
     );
     return await this.tasksService.getTask(newTaskDto.taskID);
   }

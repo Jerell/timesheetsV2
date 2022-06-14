@@ -6,6 +6,6 @@ export class AddedExpenseEvent {
     public readonly thing: string,
     public readonly quantity: number,
     public readonly day: IDay,
-    public readonly type: string,
+    public readonly type: string
   ) {}
 }

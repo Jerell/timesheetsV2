@@ -19,7 +19,7 @@ export class AddedExpenseHandler implements IEventHandler<AddedExpenseEvent> {
           quantity: event.quantity,
           day: event.day,
         },
-      }),
+      })
     );
   }
 }

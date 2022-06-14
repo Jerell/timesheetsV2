@@ -10,13 +10,13 @@ export class SetWorkerRateHandler
 {
   constructor(
     private readonly repository: TaskRepository,
-    private readonly publisher: EventPublisher,
+    private readonly publisher: EventPublisher
   ) {}
 
   async execute(command: SetWorkerRateCommand) {
     const { taskID, userID, rate } = command;
     const task = this.publisher.mergeObjectContext(
-      await this.repository.findOneByID(taskID),
+      await this.repository.findOneByID(taskID)
     );
     task.setWorkerRate(userID, rate);
     task.commit();

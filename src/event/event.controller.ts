@@ -38,7 +38,7 @@ export class EventController {
   @Post()
   async createEvent(
     @Body()
-    eventData: EventDTO,
+    eventData: EventDTO
   ) {
     try {
       const event = new Event(eventData);

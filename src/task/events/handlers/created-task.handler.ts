@@ -18,7 +18,7 @@ export class CreatedTaskHandler implements IEventHandler<CreatedTaskEvent> {
           start: event.start,
           end: event.end,
         },
-      }),
+      })
     );
   }
 }

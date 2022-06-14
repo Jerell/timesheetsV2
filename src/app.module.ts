@@ -16,7 +16,7 @@ import { EventsModule } from './event/event.module';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         connectionString: configService.get<string>(
-          'AZURE_STORAGE_CONNECTION_STRING',
+          'AZURE_STORAGE_CONNECTION_STRING'
         ),
       }),
     }),
