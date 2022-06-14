@@ -1,0 +1,26 @@
+http:
+  # Add the router
+  routers:
+    frontend:
+      entryPoints:
+        - web
+        - webSecure
+      service: frontend
+      rule: Host(`localhost`) || Host(`127.0.0.1`)
+    apis:
+      entryPoints:
+        - webSecure
+      service: apis
+      rule: (Headers(`Accept`, `application/vnd.api+json`) || PathPrefix(`/swagger`))
+  # Add the service
+  services:
+    frontend:
+      loadBalancer:
+        servers:
+          - url: http://localhost:3000/
+        passHostHeader: false
+    apis:
+      loadBalancer:
+        servers:
+          - url: http://localhost:5111/
+        passHostHeader: false

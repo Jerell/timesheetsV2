@@ -1,0 +1,27 @@
+api:
+  insecure: true
+providers:
+  file:
+    filename: /etc/traefik/dynamic.yml
+entrypoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: webSecure
+          scheme: https
+  webSecure:
+    address: ":443"
+    http:
+      tls: {}
+certificatesResolvers:
+  certbotResolver:
+    acme:
+      email: simon@paceccs.com
+      storage: acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory #staging
+      # caServer: https://acme-v02.api.letsencrypt.org/directory #production
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
