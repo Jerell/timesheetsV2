@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   registerDecorator,
   ValidationOptions,
@@ -30,6 +31,7 @@ export class IsDayConstraint implements ValidatorConstraintInterface {
 }
 
 export function IsDay(validationOptions?: ValidationOptions) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   return function (object: Object, propertyName: string) {
     registerDecorator({
       name: 'isDay',
