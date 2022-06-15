@@ -3,7 +3,7 @@ import { TasksService } from './tasks.service';
 
 import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
 import { TasksController } from './tasks.controller';
-import { Task } from './models/task.model';
+import { TASKS } from '../mocks/tasks.mock';
 
 const moduleMocker = new ModuleMocker(global);
 
@@ -17,13 +17,7 @@ describe('TasksController', () => {
       .useMocker((token) => {
         if (token === TasksService) {
           return {
-            getTasks: jest
-              .fn()
-              .mockResolvedValue([
-                new Task('mockTask0'),
-                new Task('mockTask1'),
-                new Task('mockTask2'),
-              ]),
+            getTasks: jest.fn().mockResolvedValue(TASKS),
           };
         }
         if (typeof token === 'function') {

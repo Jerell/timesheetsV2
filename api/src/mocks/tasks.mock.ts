@@ -1,8 +1,7 @@
+import { Task } from '../task/models/task.model';
+
 export const TASKS = [
-  { id: 'job1' },
-  { id: 'job2' },
-  { id: 'job3' },
-  { id: 'job4' },
-  { id: 'job5' },
-  { id: 'job6' },
+  new Task('mockTask0'),
+  new Task('mockTask1'),
+  new Task('mockTask2'),
 ];
