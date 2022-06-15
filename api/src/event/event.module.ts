@@ -7,7 +7,7 @@ import { Event } from './event.entity';
 @Module({
   imports: [
     AzureTableStorageModule.forFeature(Event, {
-      table: 'events2',
+      table: 'events',
       createTableIfNotExists: true,
     }),
   ],

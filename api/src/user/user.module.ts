@@ -7,7 +7,7 @@ import { User } from './user.entity';
 @Module({
   imports: [
     AzureTableStorageModule.forFeature(User, {
-      table: 'users2',
+      table: 'users',
       createTableIfNotExists: true,
     }),
   ],

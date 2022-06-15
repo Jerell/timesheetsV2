@@ -5,6 +5,7 @@ import { IsExistingTaskConstraint } from 'src/common/validation/is-existing-task
 import { IsUserAssignedToTaskConstraint } from 'src/common/validation/is-user-assigned-to-task';
 import { IsRegisteredConstraint } from 'src/common/validation/isRegistered';
 import { EventService } from 'src/event/event.service';
+import { Event } from 'src/event/event.entity';
 import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { TaskRepository } from './repository/task.repository';
@@ -18,11 +19,11 @@ import { ReadService } from './models/read.service';
 
 const storage = [
   AzureTableStorageModule.forFeature(Event, {
-    table: 'events2',
+    table: 'events',
     createTableIfNotExists: true,
   }),
   AzureTableStorageModule.forFeature(User, {
-    table: 'users2',
+    table: 'users',
     createTableIfNotExists: true,
   }),
 ];
