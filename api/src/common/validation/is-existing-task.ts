@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import {
   registerDecorator,
@@ -28,6 +29,7 @@ export class IsExistingTaskConstraint implements ValidatorConstraintInterface {
 }
 
 export function IsExistingTask(validationOptions?: ValidationOptions) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   return function (object: Object, propertyName: string) {
     registerDecorator({
       name: 'isExistingTask',

@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import {
   registerDecorator,
   ValidationOptions,
@@ -24,6 +23,7 @@ export function IsNotEqualTo(
   otherField: string,
   validationOptions?: ValidationOptions
 ) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   return function (object: Object, propertyName: string) {
     registerDecorator({
       name: 'isNotEqualTo',
