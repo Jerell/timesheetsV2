@@ -10,6 +10,6 @@ import {
 export class User {
   @EntityString() id: string;
   @EntityString() name: string;
-  @EntityBoolean() admin = false;
-  @EntityBoolean() active = true;
+  @EntityBoolean() admin: boolean;
+  @EntityBoolean() active: boolean;
 }

@@ -17,7 +17,7 @@ import CommandHandlers from './commands/handlers';
 import EventHandlers from './events/handlers';
 import { ReadService } from './models/read.service';
 
-const storage = [
+export const storage = [
   AzureTableStorageModule.forFeature(Event, {
     table: 'events',
     createTableIfNotExists: true,
@@ -28,7 +28,7 @@ const storage = [
   }),
 ];
 
-const constraints = [
+export const constraints = [
   IsRegisteredConstraint,
   IsUserAssignedToTaskConstraint,
   IsExistingTaskConstraint,
