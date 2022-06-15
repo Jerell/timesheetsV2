@@ -1,4 +1,4 @@
-import { Injectable, HttpException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { recordTimeDTO } from './dto/record-time.dto';
 import { RecordTimeCommand } from './commands/record-time.command';

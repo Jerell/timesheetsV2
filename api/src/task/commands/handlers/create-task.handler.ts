@@ -1,12 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CommandHandler,
-  EventBus,
-  EventPublisher,
-  ICommandHandler,
-} from '@nestjs/cqrs';
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { CreatedTaskEvent } from 'src/task/events/created-task.event';
-import { Task } from 'src/task/models/task.model';
 import { TaskRepository } from 'src/task/repository/task.repository';
 import { CreateTaskCommand } from '../create-task.command';
 

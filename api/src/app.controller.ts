@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Request,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HeaderApiKeyGuard } from './auth/header-api-key/header-api-key.guard';
 

@@ -9,7 +9,6 @@ import {
   Patch,
   UnprocessableEntityException,
   NotFoundException,
-  Logger,
 } from '@nestjs/common';
 import { UserDTO } from './user.dto';
 import { User } from './user.entity';

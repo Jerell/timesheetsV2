@@ -6,12 +6,8 @@ import {
   Param,
   Post,
   Put,
-  Patch,
   UnprocessableEntityException,
   NotFoundException,
-  Logger,
-  UseInterceptors,
-  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { EventDTO } from './event.dto';
 import { Event } from './event.entity';

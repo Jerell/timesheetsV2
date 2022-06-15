@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Query,
-  Delete,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')

@@ -6,6 +6,7 @@ import {
   AzureTableStorageResponse,
 } from '@nestjs/azure-database';
 import { User } from './user.entity';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Fuse = require('fuse.js');
 
 @Injectable()

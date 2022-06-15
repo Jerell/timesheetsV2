@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { IDay } from 'src/common/daynum';
 import initKey from 'src/common/initKey';
 import { Event } from 'src/event/event.entity';
 import { EventService } from 'src/event/event.service';
@@ -39,7 +38,7 @@ export class ReadService {
     ];
 
     const processEvent = (event: Event) => {
-      let payload = JSON.parse(event.payload);
+      const payload = JSON.parse(event.payload);
       let task: Task;
 
       if (event.type === 'createTask') {
@@ -87,7 +86,7 @@ export class ReadService {
       const batch = grouped[step];
       if (!batch) continue;
 
-      for (let event of batch) {
+      for (const event of batch) {
         processEvent(event);
       }
     }
