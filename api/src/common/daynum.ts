@@ -63,19 +63,18 @@ export class DayNum implements IDayNum {
   public readonly day: IDay;
   public readonly week: string;
   public readonly num: number;
-  private readonly timezoneOffsetMs: number =
-    new Date().getTimezoneOffset() * 1000 * 60;
+  private readonly timezoneOffsetMs: number;
 
   constructor(num: number, day?: IDay) {
     this.num = num;
-    if (day) {
-      this.day = day;
+    this.timezoneOffsetMs =
+      new Date(day || undefined).getTimezoneOffset() * 1000 * 60;
 
-      this.date = addMilliseconds(new Date(day), this.timezoneOffsetMs);
-    } else {
-      this.date = addMilliseconds(new Date(), this.timezoneOffsetMs);
-      this.day = format(this.date, 'yyyy-MM-dd') as IDay;
-    }
+    this.date = addMilliseconds(
+      new Date(day || undefined),
+      this.timezoneOffsetMs
+    );
+    this.day = format(this.date, 'yyyy-MM-dd') as IDay;
 
     const endDay = 5; // friday
     const weekday = getDay(this.date);
