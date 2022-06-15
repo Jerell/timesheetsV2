@@ -38,8 +38,36 @@ export class ReadService {
     ];
 
     const processEvent = (event: Event) => {
-      const payload = JSON.parse(event.payload);
       let task: Task;
+      let eventCausedAction = false;
+      const payload = JSON.parse(event.payload);
+      const warnNothingHappened = () =>
+        console.log(`WARNING: event did not trigger an action`, event);
+
+      const eventAction = (event: () => void) => {
+        eventCausedAction = true;
+        event();
+      };
+
+      const eventMap = {
+        setProject: eventAction(() => this.getTask(payload.parentTaskID)),
+        setStart: eventAction(() => task.setStart(payload.day)),
+        setEnd: eventAction(() => task.setEnd(payload.day)),
+        addWorker: eventAction(() => task.addWorker(payload.userID)),
+        removeWorker: eventAction(() => task.removeWorker(payload.userID)),
+        setRate: eventAction(() =>
+          task.setWorkerRate(payload.userID, payload.rate)
+        ),
+        recordTime: eventAction(() =>
+          task.recordTime(payload.userID, payload.n, payload.day)
+        ),
+        setPrice: eventAction(() =>
+          task.setPrice(payload.thing, payload.price)
+        ),
+        addExpense: eventAction(() =>
+          task.addExpense(payload.thing, payload.quantity, payload.day)
+        ),
+      };
 
       if (event.type === 'createTask') {
         task = new Task(event.taskID);
@@ -48,38 +76,10 @@ export class ReadService {
         this.tasks.push(task);
       } else {
         task = this.getTask(event.taskID);
-
-        switch (event.type) {
-          case 'setProject':
-            const project = this.getTask(payload.parentTaskID);
-            task.parent = project;
-            break;
-          case 'setStart':
-            task.setStart(payload.day);
-            break;
-          case 'setEnd':
-            task.setEnd(payload.day);
-            break;
-          case 'addWorker':
-            task.addWorker(payload.userID);
-            break;
-          case 'removeWorker':
-            task.removeWorker(payload.userID);
-            break;
-          case 'setRate':
-            task.setWorkerRate(payload.userID, payload.rate);
-            break;
-          case 'recordTime':
-            task.recordTime(payload.userID, payload.n, payload.day);
-            break;
-          case 'setPrice':
-            task.setPrice(payload.thing, payload.price);
-            break;
-          case 'addExpense':
-            task.addExpense(payload.thing, payload.quantity, payload.day);
-            break;
-        }
+        eventMap[event.type]();
       }
+
+      if (!eventCausedAction) warnNothingHappened();
     };
 
     for (const step of processOrder) {
